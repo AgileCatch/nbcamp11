@@ -13,7 +13,7 @@ class BestComMenu {
     fun displayMenu(){
         println("[ Best Combination MENU ]")
         for((index, item)in menuList.withIndex()){
-            println("${index + 1}. ${item.name}   |${item.price} |")
+            println("${index + 1}. ${item.name}   |${item.price} 원|")
         }
         println("0.  뒤로가기")
     }

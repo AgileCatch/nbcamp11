@@ -1,5 +1,6 @@
 package com.example.kiosk
 
+import androidx.core.graphics.green
 import java.util.Scanner
 
 
@@ -17,7 +18,7 @@ fun main() {
     val won = "w"
 
     while (true){
-        println("\" 공차에 오신걸 환영합니다/\"")
+        println("\" 공차에 오신걸 환영합니다 \"")
         println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
         println("[ 공차 메뉴 ]")
         println("1. 베스트 콤비네이션      | 음료 토핑 조합   ")
@@ -42,6 +43,18 @@ fun main() {
                     order.addToOrder(menuItem)
                 }else{
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                }
+            }
+            2 ->{
+                originalTMenu.displayMenu()
+                print("선택 ")
+                val originalTChoice = scanner.nextInt()
+                if(originalTChoice == 1) continue
+                val menuItem = originalTMenu.getMenuItem(originalTChoice)
+                if(menuItem !=null){
+                    order.addToOrder(menuItem)
+                }else{
+                    println("잘못된 번호를 입력했어요. 다시 입력해주시요")
                 }
             }
         }

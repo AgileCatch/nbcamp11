@@ -11,7 +11,7 @@ class Order {
     fun displayOrder(){
         println("[ Orders ]")
         for(item in orderList){
-            println("${item.name}   | W ${item.price}  | ")
+            println("${item.name}   | ${item.price}  | ")
         }
     }
 
