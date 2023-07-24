@@ -1,0 +1,176 @@
+package com.example.myapplication
+
+data class OrderData(
+    val menu: String,
+    val price: Int,
+    val quantity: Int
+)
+
+abstract class orderClass {
+    abstract fun cafe(vararg strings: String)
+}
+
+class Order : orderClass() {
+    private val orders = mutableListOf<OrderData>()
+
+    override fun cafe(vararg strings: String) {
+        println("주문이 완료되었습니다. 주문표와 영수증을 챙겨주세요.")
+    }
+    fun addOrder(menu: String, price: Int, quantity: Int) {
+        orders.add(OrderData(menu, price, quantity))}
+
+}
+
+fun main() {
+    val order = Order()
+    val orders = mutableListOf<OrderData>()
+    var price = Int
+
+    println("어서오세요, 공들여 맛있는 공차입니다")
+
+    while (true) {
+        println("1.포장 2.매장 3.뒤로 가기 선택해주세요.")
+        val orderOption = readLine()?.toIntOrNull()
+
+        when (orderOption) {
+            1, 2 -> {
+                println("메뉴를 선택해주세요.")
+                println("1. 인기 메뉴 2. 오리지널티 3. 밀크티 4. 커피 5. 쥬얼리 6. 결제 하기 7.뒤로 가기")
+                val menuChoice = readLine()?.toIntOrNull()
+                val menuBest = readLine()?.toIntOrNull()
+                val menuOriginal = readLine()?.toIntOrNull()
+                val menuMilkTea = readLine()?.toIntOrNull()
+                val menuCoffee = readLine()?.toIntOrNull()
+                val menuJewelry = readLine()?.toIntOrNull()
+
+                when (menuChoice) {
+                    1 -> {
+                        println("공차의 인기 메뉴 입니다.")
+                        println("1. 블랙밀크티+펄(4,700원)")
+                        println("2. 타로밀크티+펄 (4,700원)")
+                        println("3. 우롱티+코코넛+밀크폼(4,700원)")
+                        println("4. 아메리카노+펄 (4,700원)")
+                        println("5. 뒤로 돌아가기")
+                        when (menuBest) {
+                            1 -> {println("1. 블랙밀크티+펄(4,700원) 담기 2. 뒤로 돌아가기")
+                                println("$orders, $price")
+                                val choice = readLine()?.toIntOrNull()
+                                if (choice == 1) {
+
+                                    order.addOrder("블랙밀크티+펄", 4700, 1)}
+
+
+                            }
+                            2 -> {println("1. 타로밀크티+펄 (4,700원) 담기 2. 뒤로 돌아가기")
+                                println("$orders, $price")
+
+                            }
+                            3 -> {println("1. 우롱티+코코넛+밀크폼(4,700원) 담기 2. 뒤로 돌아가기")
+                                println("$orders, $price")
+
+                            }
+                            4 -> {println("1. 아메리카노+펄 (4,700원) 담기 2. 뒤로 돌아가기")
+                                println("$orders, $price")
+
+                            }
+                        }
+                    }
+                    2 -> {
+                        println("공차의 오리지널티 메뉴입니다.")
+                        println("1. 블랙티 (4,000원)")
+                        println("2. 그린티 (4,000원)")
+                        println("3. 얼그레이티 (4,000원)")
+                        println("4. 우롱티 (5,100원)")
+                        println("5. 뒤로 돌아가기")
+                        when(menuOriginal){
+                            1 -> {
+                                println("1. 블랙밀크티+펄(4,700원) 담기 2. 뒤로 돌아가기")
+                            }
+                            2 -> {
+                                println("1. 블랙밀크티+펄(4,700원) 담기 2. 뒤로 돌아가기")
+                            }
+                            3 -> {
+                                println("1. 블랙밀크티+펄(4,700원) 담기 2. 뒤로 돌아가기")
+                            }
+                            4 -> {
+                                println("1. 블랙밀크티+펄(4,700원) 담기 2. 뒤로 돌아가기")
+                            }
+                            5 -> {
+
+                            }
+
+                        }
+                        }
+                    3 -> {
+                        println("공차의 밀크티 메뉴입니다.")
+                        println("1. 블랙밀크티 (4,500원)")
+                        println("2. 타로밀크티 (4,500원)")
+                        println("3. 얼그레이밀크티 (4,500원)")
+                        println("4. 제주그린밀크티 (4,900원)")
+                        println("5. 초코밀크티 (4,500원)")
+                        println("6. 피스타치오밀크티 (4,900원)")
+                        println("7. 뒤로 돌아가기")
+                        when(menuMilkTea){
+                            1 -> {}
+                            2 -> {}
+                            3 -> {}
+                            4 -> {}
+                            5 -> {}
+                            6 -> {}
+                            7 -> {}
+
+                        }
+
+                        }
+                    4 -> {
+                        println("공차의 커피 메뉴입니다.")
+                        println("1. 아메리카노 (3,700원)")
+                        println("2. 카페라떼 (4,200원)")
+                        println("3. 카라멜마끼아또 (4,500원)")
+                        println("4. 바닐라 (4,500원)")
+                        println("5. 뒤로 돌아가기")
+                        when(menuCoffee){
+                            1 -> {}
+                            2 -> {}
+                            3 -> {}
+                            4 -> {}
+                            5 -> {}
+
+                        }
+
+                        }
+                    5 -> {
+                        println("공차의 쥬얼리 메뉴입니다.")
+                        println("1. 딸기쥬얼리 (5,300원)")
+                        println("2. 브라운슈가쥬얼리 (5,500원)")
+                        println("3. 뒤로 돌아가기")
+                        when(menuJewelry){
+                            1 -> {}
+                            2 -> {}
+                            3 -> {}
+
+                        }
+
+                        }
+                    6 -> {
+
+                    }
+
+                    7 -> {
+
+                    }
+
+
+
+                }
+
+            }
+
+        }
+    }
+
+
+
+}
+
+
