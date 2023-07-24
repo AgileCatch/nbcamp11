@@ -6,7 +6,11 @@ import java.util.Scanner
 fun main() {
     val scanner = Scanner(System.`in`)
     val coffeeMenu = CoffeeMenu()
-   // val order = Order()
+    val bestcomMunu = BestComMenu()
+    val jewelryMenu = JewelryMenu()
+    val milkTMenu = MilkTMenu()
+    val originalTMenu = OriginalTMenu()
+    val order = Order()
 
     println("현재 잔액을 입력하세요")
     var cash = scanner.nextInt()
@@ -29,11 +33,16 @@ fun main() {
 
         when(choice){
             1 -> {
-                //coffeeMenu.displayMenu()
-                print("선택 :")
-                val coffeeChoice = scanner.nextInt()
-                if(coffeeChoice == 0) continue
-                //val menuItem = coffeeMenu.getMenuItem(coffeeChoice)
+               bestcomMunu.displayMenu()
+                print("선택 ")
+                val bestcomChoice = scanner.nextInt()
+                if(bestcomChoice == 0 ) continue
+                val menuItem = bestcomMunu.getMenuItem(bestcomChoice)
+                if (menuItem != null){
+                    order.addToOrder(menuItem)
+                }else{
+                    println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                }
             }
         }
     }
