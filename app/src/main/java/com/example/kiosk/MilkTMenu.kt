@@ -12,7 +12,7 @@ class MilkTMenu {
         menuList.add(MenuItem("피스타치오 밀크티",4900))
     }
     fun displayMenu(){
-        println("[ MilkT MENU ]")
+        println("\n[ MilkT MENU ]")
     for((index, item)in menuList.withIndex()){
         println("${index + 1}. ${item.name}   |${item.price} 원|")
     }

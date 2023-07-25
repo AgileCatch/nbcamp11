@@ -12,7 +12,7 @@ class Order {
 
     fun displayOrder() {
         if (orderList.isEmpty()) {
-            println("장바구니가 비어있습니다.")
+            println("\n장바구니가 비어있습니다.")
             println("====메뉴를 선택해주세요====")
         } else {
             println("[ | 장바구니 | ]")

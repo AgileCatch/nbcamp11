@@ -10,7 +10,7 @@ class OriginalTMenu {
         menuList.add(MenuItem("우롱티      ",5100))
     }
     fun displayMenu(){
-        println(" [ OriginalT MENU ]")
+        println("\n[ OriginalT MENU ]")
         for((index, item)in menuList.withIndex()){
             println("${index + 1}. ${item.name}  |  ${item.price} 원 |")
         }

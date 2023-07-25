@@ -9,7 +9,7 @@ class JewelryMenu {
 
     }
     fun displayMenu(){
-        println("[ Jewelry MENU ]")
+        println("\n[ Jewelry MENU ]")
         for((index, item)in menuList.withIndex()){
             println("${index + 1}. ${item.name}   |${item.price} 원|")
         }

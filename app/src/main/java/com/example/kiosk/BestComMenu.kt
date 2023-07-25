@@ -11,7 +11,7 @@ class BestComMenu {
         menuList.add(MenuItem("아메리카노+펄     ",4000))
     }
     fun displayMenu(){
-        println("[ Best Combination MENU ]")
+        println("\n[ Best Combination MENU ]")
         for((index, item)in menuList.withIndex()){
             println("${index + 1}. ${item.name}   |${item.price} 원|")
         }

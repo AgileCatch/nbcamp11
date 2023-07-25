@@ -13,7 +13,7 @@ class CoffeeMenu {
     }
 
     fun displayMenu(){
-        println("[ Coffee MENU ]")
+        println("\n[ Coffee MENU ]")
         for((index,item) in menuList.withIndex()){
             println("${index + 1}. ${item.name}  | W ${item.price}  | ")
         }
