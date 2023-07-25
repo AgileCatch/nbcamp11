@@ -2,7 +2,7 @@ package com.example.kiosk
 
 class Waiting {
     private val completedPayments = mutableListOf<String>()
-    private var currentNumber = 100
+    private var currentNumber = 0
 
     fun recordCompletedPayment(payment: String) {
         completedPayments.add(payment)
@@ -16,7 +16,7 @@ class Waiting {
         if (store) {
             println("매장 결제 대기 번호표: $currentNumber")
         } else {
-            currentNumber += 100
+            currentNumber += 1
             println("포장 결제 대기 번호표: $currentNumber")
         }
     }

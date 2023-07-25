@@ -1,5 +1,7 @@
 package com.example.kiosk
 
+import kotlinx.coroutines.delay
+
 class Order {
     private val orderList = ArrayList<MenuItem>()
 
@@ -25,9 +27,11 @@ class Order {
         return orderList.sumOf { it.price }
     }
 
-    fun clearOrder(){
+    suspend fun clearOrder(){
         orderList.clear()
-        println(" 주문이 완료되었습니다.")
+        println("\"주문이 완료되었습니다.\"")
+        delay(1000)
+        println("\"결제가 완료되었습니다.\"")
     }
 
     fun isEmpty(): Boolean {

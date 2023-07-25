@@ -1,15 +1,20 @@
 package com.example.kiosk
 
-class Payment {
+import kotlinx.coroutines.delay
+
+class Payment(private val order: Order) {
     private var paymentOption: String = ""
     private var couponCode: String = ""
     private var cashReceipt: String = ""
 
-    fun startPayment() {
-        println("장바구니 목록을 출력합니다.")
-        printReceipt()
+
+    suspend fun startPayment() {
+        println("\n\"총 결제 금액\"")
+        println("=========")
+        println(" ${order.getTotalPrice()}원")
         println("결제 수단을 선택해주세요: 1. 카드, 2. 쿠폰, 3. 현금, 그 외 뒤로 가기")
         val paymentChoice = readLine()?.toIntOrNull()
+        delay(1000)
 
 
         when (paymentChoice) {
@@ -73,15 +78,18 @@ class Payment {
         }
     }
 
-    private fun showReceiptOption() {
+    private suspend fun showReceiptOption() {
         println("영수증을 발급하시겠습니까? (1.예, 2.아니오, 그 외 뒤로 가기)")
 
         val receiptOption = readLine()?.toIntOrNull()
 
         when (receiptOption) {
             1 -> {
-                println("장바구니 목록을 출력합니다.")
+
                 printReceipt()
+                print("결제금액 : ")
+                println("${order.getTotalPrice()}")
+                delay(1000)
             }
             2 -> {
                 println("결제가 완료되었습니다.")
@@ -94,8 +102,9 @@ class Payment {
     }
 
     private fun printReceipt() {
-        println("-영수증-")
-        printReceipt()
+        println("\"-영수증-\"")
+
+
         println("결제 수단: $paymentOption")
 
         when (paymentOption) {
@@ -104,7 +113,9 @@ class Payment {
         }
 
 
-        println("장바구니 목록")
-        // 장바구니 목록을 출력하는 코드
+    }
+
+    fun getPaymentDetails(): String {
+        return paymentOption
     }
 }

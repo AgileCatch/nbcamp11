@@ -13,10 +13,13 @@ suspend fun main() {
     val milkTMenu = MilkTMenu()
     val originalTMenu = OriginalTMenu()
     val order = Order()
+    val payment = Payment(order)
+    val waiting = Waiting()
+
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
-    println("\n현재 잔액을 입력해주세요 :")
-    var cash = scanner.nextInt()
-    val won = "원"
+//    println("\n현재 잔액을 입력해주세요 :")
+//    var cash = scanner.nextInt()
+//    val won = "원"
 
     while (true) {
 //        println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
@@ -52,7 +55,7 @@ suspend fun main() {
                 originalTMenu.displayMenu()
                 print("선택 ")
                 val originalTChoice = scanner.nextInt()
-                if (originalTChoice == 1) continue
+                if (originalTChoice == 0) continue
                 val menuItem = originalTMenu.getMenuItem(originalTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
@@ -65,7 +68,7 @@ suspend fun main() {
                 milkTMenu.displayMenu()
                 print("선택 ")
                 val milkTChoice = scanner.nextInt()
-                if (milkTChoice == 1) continue
+                if (milkTChoice == 0) continue
                 val menuItem = milkTMenu.getMenuItem(milkTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
@@ -78,7 +81,7 @@ suspend fun main() {
                 jewelryMenu.displayMenu()
                 print("선택 ")
                 val jewerlryChoice = scanner.nextInt()
-                if (jewerlryChoice == 1) continue
+                if (jewerlryChoice == 0) continue
                 val menuItem = jewelryMenu.getMenuItem(jewerlryChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
@@ -91,8 +94,8 @@ suspend fun main() {
                 coffeeMenu.displayMenu()
                 print("선택 ")
                 val coffeeChoice = scanner.nextInt()
-                if (coffeeChoice == 1) continue
-                val menuItem = jewelryMenu.getMenuItem(coffeeChoice)
+                if (coffeeChoice == 0) continue
+                val menuItem = coffeeMenu.getMenuItem(coffeeChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
                 } else if (coffeeChoice != 0) {
@@ -106,23 +109,20 @@ suspend fun main() {
                 continue
             }
             order.displayOrder()
-            println("[ 장바구니 ]")
-            println("${order.getTotalPrice()}" + won)
+            print("결제금액 :")
+            println("${order.getTotalPrice()}원" )
             println("1. 주문    2. 메뉴추가")
             print("주문하려면 1번 다른 메뉴를 보고 싶으면 2번을 눌러주세요: ")
             val orderChoice = scanner.nextInt()
             delay(1000)
             when (orderChoice) {
                 1 -> {
-                    if (order.getTotalPrice() <= cash) {
-                        cash -= order.getTotalPrice()
-                        println("주문이 완료되었습니다.")
-                        delay(1000)
-                        println("현재 잔액은 $cash 원 입니다.")
-                        order.clearOrder()
-                    } else {
-                        println("현재 잔액은 ${cash}원 으로 ${order.getTotalPrice() - cash}원이 부족하여 결제를 할 수 없습니다.")
-                    }
+                    payment.startPayment()
+                    delay(2000)
+                    waiting.recordCompletedPayment(payment.getPaymentDetails())
+                    waiting.printWaitingNumber(false)
+                    waiting.printReceiptCount()
+                    order.clearOrder()
                 }
 
                 2 -> continue
