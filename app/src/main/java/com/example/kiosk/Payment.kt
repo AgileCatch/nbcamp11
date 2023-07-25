@@ -47,7 +47,7 @@ class Payment(private val order: Order) {
                     }
                     2 -> {
                         println("결제가 완료되었습니다.")
-                        showReceiptOption()
+
                     }
                     else -> {
                         println("잘못된 선택입니다.")
