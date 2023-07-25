@@ -1,7 +1,6 @@
 package com.example.kiosk
 
 import androidx.core.graphics.green
-import kotlinx.coroutines.delay
 import java.util.Scanner
 
 
@@ -23,7 +22,7 @@ suspend fun main() {
         println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
         println("[ 공차 메뉴 ]")
         println("1. 베스트 콤비네이션   | 공차 고객들이 즐겨찾는 티와 토핑의 환상의 조합")
-        println("2. 오리지널 티       | 찻잎을 정성껏 우려낸 프리미엄 잎차 ")
+        println("2. 오리지널 티       | 찻잎을 정성껏 우려낸 프리미엄 잎차")
         println("3. 밀크티           | 프리미엄 잎차에 부드러운 밀크를 넣은 공차의 No.1메뉴")
         println("4. 쥬얼리           | 쥬얼리가 기본으로 들어간 맛있는 밀크티")
         println("5. Coffee         | 프리미엄 잎차와 100% 아라비카 원두의 이색 만남")
@@ -34,6 +33,7 @@ suspend fun main() {
         val choice = scanner.nextInt()
 
         when (choice) {
+
             1 -> {
                 bestcomMenu.displayMenu()
                 print("선택 ")
@@ -42,7 +42,7 @@ suspend fun main() {
                 val menuItem = bestcomMenu.getMenuItem(bestcomChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
-                }else{
+                } else if (bestcomChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
@@ -51,14 +51,15 @@ suspend fun main() {
                 originalTMenu.displayMenu()
                 print("선택 ")
                 val originalTChoice = scanner.nextInt()
-                if(originalTChoice == 1) continue
+                if (originalTChoice == 1) continue
                 val menuItem = originalTMenu.getMenuItem(originalTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
-                } else {
+                } else if (originalTChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             3 -> {
                 milkTMenu.displayMenu()
                 print("선택 ")
@@ -67,10 +68,11 @@ suspend fun main() {
                 val menuItem = milkTMenu.getMenuItem(milkTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
-                } else {
+                } else if (milkTChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             4 -> {
                 jewelryMenu.displayMenu()
                 print("선택 ")
@@ -79,10 +81,11 @@ suspend fun main() {
                 val menuItem = jewelryMenu.getMenuItem(jewerlryChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
-                } else {
+                } else if (jewerlryChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             5 -> {
                 coffeeMenu.displayMenu()
                 print("선택 ")
@@ -91,9 +94,18 @@ suspend fun main() {
                 val menuItem = jewelryMenu.getMenuItem(coffeeChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
-                } else {
+                } else if (coffeeChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
+            }
+
+            7 -> {
+
+                // 취소를 누르면 메뉴판으로 돌아가기
+//                order.clearOrder()
+                println("진행중인 주문이 취소되었어요.")
+                continue
+
             }
 
             6 -> {
