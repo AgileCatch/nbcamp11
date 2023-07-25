@@ -5,7 +5,7 @@ class Order {
 
     fun addToOrder(item: MenuItem){
         orderList.add(item)
-        println("${item.name}가 장바구니에 추가 되었습니다.")
+        println("\"${item.name}\"이(가) 장바구니에 추가 되었습니다.")
     }
 
     fun displayOrder(){
