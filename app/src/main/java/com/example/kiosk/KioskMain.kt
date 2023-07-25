@@ -52,7 +52,7 @@ suspend fun main() {
                 originalTMenu.displayMenu()
                 print("선택 ")
                 val originalTChoice = scanner.nextInt()
-                if (originalTChoice == 1) continue
+                if (originalTChoice == 0) continue
                 val menuItem = originalTMenu.getMenuItem(originalTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
@@ -65,7 +65,7 @@ suspend fun main() {
                 milkTMenu.displayMenu()
                 print("선택 ")
                 val milkTChoice = scanner.nextInt()
-                if (milkTChoice == 1) continue
+                if (milkTChoice == 0) continue
                 val menuItem = milkTMenu.getMenuItem(milkTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
@@ -78,7 +78,7 @@ suspend fun main() {
                 jewelryMenu.displayMenu()
                 print("선택 ")
                 val jewerlryChoice = scanner.nextInt()
-                if (jewerlryChoice == 1) continue
+                if (jewerlryChoice == 0) continue
                 val menuItem = jewelryMenu.getMenuItem(jewerlryChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
@@ -91,8 +91,8 @@ suspend fun main() {
                 coffeeMenu.displayMenu()
                 print("선택 ")
                 val coffeeChoice = scanner.nextInt()
-                if (coffeeChoice == 1) continue
-                val menuItem = jewelryMenu.getMenuItem(coffeeChoice)
+                if (coffeeChoice == 0) continue
+                val menuItem = coffeeMenu.getMenuItem(coffeeChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
                 } else if (coffeeChoice != 0) {

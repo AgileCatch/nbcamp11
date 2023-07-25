@@ -1,7 +1,6 @@
 package com.example.kiosk
 
-import android.view.Menu
-import java.net.Inet4Address
+
 
 class CoffeeMenu {
     private val menuList = ArrayList<MenuItem>()
