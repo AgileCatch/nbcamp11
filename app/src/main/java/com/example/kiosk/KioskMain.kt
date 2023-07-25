@@ -14,14 +14,13 @@ suspend fun main() {
     val originalTMenu = OriginalTMenu()
     val order = Order()
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
-    println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
-    println("현재 잔액을 입력하세요.")
+    println("\n현재 잔액을 입력해주세요 :")
     var cash = scanner.nextInt()
     val won = "원"
 
     while (true) {
 //        println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
-//        println("아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
+        println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
         println("[ 공차 메뉴 ]")
         println("1. 베스트 콤비네이션   | 공차 고객들이 즐겨찾는 티와 토핑의 환상의 조합")
         println("2. 오리지널 티       | 찻잎을 정성껏 우려낸 프리미엄 잎차")
