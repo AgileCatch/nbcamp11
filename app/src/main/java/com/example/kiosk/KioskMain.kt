@@ -5,7 +5,7 @@ import kotlinx.coroutines.delay
 import java.util.Scanner
 
 
-suspend fun main() {
+fun main() {
     val scanner = Scanner(System.`in`)
     val coffeeMenu = CoffeeMenu()
     val bestcomMenu = BestComMenu()
@@ -42,7 +42,7 @@ suspend fun main() {
                 val menuItem = bestcomMenu.getMenuItem(bestcomChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
-                } else {
+                }else{
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
