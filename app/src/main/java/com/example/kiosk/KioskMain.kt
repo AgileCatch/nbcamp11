@@ -86,6 +86,7 @@ suspend fun main() {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             5 -> {
                 coffeeMenu.displayMenu()
                 print("선택 ")
@@ -97,7 +98,8 @@ suspend fun main() {
                 } else if (coffeeChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
-            } 6 -> {
+            }
+            6 -> {
             if(order.isEmpty()){
                 println("장바구니가 비어있습니다.")
                 println("=====메뉴를 골라주세요")
