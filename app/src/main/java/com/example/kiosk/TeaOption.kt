@@ -80,16 +80,4 @@ class TeaOption {
         }
     }
 
-
-    fun getHotIceOption(): String {
-        return hotIceOption
-    }
-
-    fun getIceLevelOption(): String {
-        return iceLevelOption
-    }
-
-    fun getSweetnessOption(): String {
-        return sweetnessOption
-    }
 }
