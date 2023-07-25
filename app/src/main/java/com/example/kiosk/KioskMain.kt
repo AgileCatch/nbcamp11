@@ -5,7 +5,7 @@ import kotlinx.coroutines.delay
 import java.util.Scanner
 
 
-fun main() {
+suspend fun main() {
     val scanner = Scanner(System.`in`)
     val coffeeMenu = CoffeeMenu()
     val bestcomMenu = BestComMenu()
