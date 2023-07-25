@@ -1,10 +1,11 @@
 package com.example.kiosk
 
 import androidx.core.graphics.green
+import kotlinx.coroutines.delay
 import java.util.Scanner
 
 
-fun main() {
+suspend fun main() {
     val scanner = Scanner(System.`in`)
     val coffeeMenu = CoffeeMenu()
     val bestcomMenu = BestComMenu()
@@ -15,7 +16,7 @@ fun main() {
 
     println("현재 잔액을 입력하세요.")
     var cash = scanner.nextInt()
-    val won = "w"
+    val won = "원"
 
     while (true) {
         println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
@@ -97,7 +98,37 @@ fun main() {
                 } else if (coffeeChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
+            } 6 -> {
+            if(order.isEmpty()){
+                println("장바구니가 비어있습니다.")
+                println("=====메뉴를 골라주세요")
+                continue
             }
+            order.displayOrder()
+            println("[ 장바구니 ]")
+            println("${order.getTotalPrice()}" + won)
+            println("1.  주문    2. 추가메뉴")
+            print("주문하려면 1번 다른 메뉴를 보고 싶으면 2번을 눌러주세요: ")
+            val orderChoice = scanner.nextInt()
+            delay(1000)
+            when (orderChoice) {
+                1 -> {
+                    if (order.getTotalPrice() <= cash) {
+                        cash -= order.getTotalPrice()
+                        println("주문이 완료되었습니다.")
+                        delay(1000)
+                        println( "현재 잔액은 $cash 원 입니다.")
+                        order.clearOrder()
+                    } else {
+                        println("현재 잔액은 ${cash}원 으로 ${order.getTotalPrice() - cash}원이 부족하여 결제를 할 수 없습니다.")
+                    }
+                }
+
+                2 -> continue
+                else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+            }
+        }
+
 
             7 -> {
 
@@ -107,6 +138,9 @@ fun main() {
                 continue
 
             }
+
+
+
         }
     }
 
