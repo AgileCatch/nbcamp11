@@ -1,13 +1,11 @@
 package com.example.kiosk
 
-import java.util.LinkedList
-
-class PaymentProcessor {
+class Payment {
     private var paymentOption: String = ""
     private var couponCode: String = ""
     private var cashReceipt: String = ""
 
-    fun startPaymentProcess() {
+    fun startPayment() {
         println("장바구니 목록을 출력합니다.")
         printReceipt()
         println("결제 수단을 선택해주세요: 1. 카드, 2. 쿠폰, 3. 현금, 그 외 뒤로 가기")
@@ -111,38 +109,3 @@ class PaymentProcessor {
     }
 }
 
-class WaitingProcessor {
-    private val completedPayments = LinkedList<String>()
-    private var currentNumber = 100
-
-    fun recordCompletedPayment(payment: String) {
-        completedPayments.add(payment)
-    }
-
-    fun printReceiptCount() {
-        println("현재 결제 완료된 항목의 개수: ${completedPayments.size}")
-    }
-
-    fun printWaitingNumber(store: Boolean) {
-        if (store) {
-            println("매장 결제 대기 번호표: $currentNumber")
-        } else {
-            currentNumber += 100
-            println("포장 결제 대기 번호표: $currentNumber")
-        }
-    }
-
-    fun printWaitingOrder() {
-        println("대기 중인 주문 개수: ${completedPayments.size}")
-    }
-}
-
-
-fun main() {
-    val paymentProcessor = PaymentProcessor()
-    val waitingProcessor = WaitingProcessor()
-
-    paymentProcessor.startPaymentProcess()
-
-
-}
