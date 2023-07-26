@@ -1,6 +1,6 @@
 package com.example.kiosk
 
-class BestComMenu {
+class BestComMenu :Menu{
 
     private val menuList = ArrayList<MenuItem>()
 
@@ -10,7 +10,7 @@ class BestComMenu {
         menuList.add(MenuItem("우롱티+코코넛+밀크폼",4700))
         menuList.add(MenuItem("아메리카노+펄     ",4000))
     }
-    fun displayMenu(){
+    override fun displayMenu(){
         println("\n[ Best Combination MENU ]")
         for((index, item)in menuList.withIndex()){
             println("${index + 1}. ${item.name}   |${item.price} 원|")
@@ -18,7 +18,7 @@ class BestComMenu {
         println("0. 뒤로가기")
     }
 
-    fun getMenuItem(index: Int): MenuItem?{
+    override fun getMenuItem(index: Int): MenuItem?{
         return if(index in 1..menuList.size) menuList[index - 1] else null
     }
 }

@@ -2,7 +2,7 @@ package com.example.kiosk
 
 
 
-class CoffeeMenu {
+class CoffeeMenu:Menu {
     private val menuList = ArrayList<MenuItem>()
 
     init {
@@ -12,7 +12,7 @@ class CoffeeMenu {
         menuList.add(MenuItem("바닐라라떼 ",4500))
     }
 
-    fun displayMenu(){
+    override fun displayMenu(){
         println("\n[ Coffee MENU ]")
         for((index,item) in menuList.withIndex()){
             println("${index + 1}. ${item.name}  | W ${item.price}  | ")
@@ -20,7 +20,7 @@ class CoffeeMenu {
         println("0. 뒤로가기")
     }
 
-    fun getMenuItem(index: Int): MenuItem?{
+    override fun getMenuItem(index: Int): MenuItem?{
         return if (index in 1..menuList.size) menuList[index - 1] else null
     }
 }
