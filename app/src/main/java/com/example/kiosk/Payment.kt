@@ -15,10 +15,10 @@ class Payment(private val order: Order) {
     suspend fun startPayment() {
         paymentTime = System.currentTimeMillis()
         println("\n\"총 결제 금액\"")
+        println("결제 시간: ${formatTime(paymentTime)}")
         println("=========")
         println(" ${order.getTotalPrice()}원")
         println("1. 카드\n2. 쿠폰\n3. 현금 \n그 외 뒤로 가기\n결제 수단을 선택해주세요: ")
-        println("결제 시간: ${formatTime(paymentTime)}")
         val paymentChoice = readLine()?.toIntOrNull()
         delay(1000)
 
