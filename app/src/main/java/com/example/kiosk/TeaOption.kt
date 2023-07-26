@@ -3,34 +3,35 @@ package com.example.kiosk
 import java.util.Scanner
 
 class TeaOption {
-    var hotIceOption: String = "hot"
+    var hotIceOption: String = "ICE"
     var iceLevelOption: String = "regular"
-    var sweetnessOption: String = "10%"
+    var sweetnessOption: String = "50%"
 
     fun displayMenu() {
-        println("1. 온도 설정")
+        println("\n현재옵션:${hotIceOption}/${sweetnessOption}/${iceLevelOption}\n옵션을 변경하려면 번호를 입력하세요.")
+        println("1. ICE/HOT 설정")
         println("2. 당도 설정")
-        println("3. 얼음 설정")
+        println("3. 얼음량 설정")
         println("0. 뒤로가기")
     }
 
     fun setHotIceOption(optionChoice: Int) {
-        println("음료 온도를 설정해 주세요.")
-        println("1. hot")
-        println("2. ice")
+        println("\n음료 온도를 설정해 주세요.")
+        println("1. HOT")
+        println("2. ICE")
         val hotIceChoice = readOptionInput(1, 2)
         if (hotIceChoice == 1) {
-            hotIceOption = "hot"
+            hotIceOption = "HOT"
             println("옵션이 변경되었습니다. 현재 옵션: $hotIceOption")
         } else if (hotIceChoice == 2) {
-            hotIceOption = "ice"
+            hotIceOption = "ICE"
             println("옵션이 변경되었습니다. 현재 옵션: $hotIceOption")
         }
         displayMenu()
     }
 
     fun setIceLevelOption(optionChoice: Int) {
-        println("얼음 옵션을 설정해 주세요.")
+        println("\n얼음 옵션을 설정해 주세요.")
         println("1. less")
         println("2. regular")
         println("3. full")
@@ -53,7 +54,7 @@ class TeaOption {
     }
 
     fun setSweetnessOption(optionChoice: Int) {
-        println("당도를 설정해 주세요.")
+        println("\n당도를 설정해 주세요.")
         println("1. 0%")
         println("2. 30%")
         println("3. 50%")
@@ -91,7 +92,7 @@ class TeaOption {
         var choice = -1
         val scanner = Scanner(System.`in`)
         while (choice !in min..max) {
-            print("선택: ")
+            print("옵션 선택: ")
             choice = scanner.nextInt()
             if (choice !in min..max) {
                 println("잘못된 번호를 입력했어요. 다시 입력해주세요")
@@ -101,7 +102,7 @@ class TeaOption {
     }
 
     fun getOptions(): String {
-        return "온도: $hotIceOption, 당도: $sweetnessOption, 얼음: $iceLevelOption"
+        return "$hotIceOption/$sweetnessOption/$iceLevelOption"
 
     }
 }

@@ -9,8 +9,8 @@ class ToppingOpion {
         menuList.add(ToppingItem("알로에 ", 500))
         menuList.add(ToppingItem("화이트펄 ", 500))
         menuList.add(ToppingItem("코코넛 ", 500))
-        menuList.add(ToppingItem("밀크폼 ", 500))
-        menuList.add(ToppingItem("치즈폼 ", 500))
+        menuList.add(ToppingItem("밀크폼 ", 700))
+        menuList.add(ToppingItem("치즈폼 ", 700))
     }
 
     fun displayMenu() {

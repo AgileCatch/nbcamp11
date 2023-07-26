@@ -7,7 +7,7 @@ import java.util.Scanner
 suspend fun main() {
     val scanner = Scanner(System.`in`)
     val teaOption = TeaOption()
-    val menus = listOf(BestComMenu(), CoffeeMenu(), JewelryMenu(), MilkTMenu(), OriginalTMenu())
+    val menus = listOf(BestComMenu(),OriginalTMenu(),MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
     val order = Order()
     val payment = Payment(order)
     val waiting = Waiting()
@@ -35,16 +35,16 @@ suspend fun main() {
             in 1..menus.size -> {
                 val selectedMenu = menus[choice - 1]
                 selectedMenu.displayMenu()
-                print("선택 ")
+                print("음료 선택:")
                 val menuChoice = scanner.nextInt()
                 if (menuChoice == 0) continue
                 val menuItem = selectedMenu.getMenuItem(menuChoice)
                 if (menuItem != null) {
                     teaOption.displayMenu()
-                    print("음료의 옵션을 선택해주세요:")
+                    print("옵션 선택:")
                     while (true) {
                         val optionChoice = scanner.nextInt()
-                        teaOption.displayMenu()
+//                        teaOption.displayMenu()
 
                         when (optionChoice) {
                             0 -> break //0을 누르면 메뉴판으로 감
@@ -62,13 +62,13 @@ suspend fun main() {
             6 -> {
                 if (order.isEmpty()) {
                     println("장바구니가 비어있습니다.")
-                    println("=====메뉴를 골라주세요")
+                    println("=====메뉴를 골라주세요=====")
                     continue
                 }
                 order.displayOrder()
-                print("결제금액 :")
+                print("\n결제금액 :")
                 println("${order.getTotalPrice()}원")
-                println("1. 주문    2. 메뉴추가")
+                println("1. 주문\n2. 메뉴추가")
                 print("주문하려면 1번 다른 메뉴를 보고 싶으면 2번을 눌러주세요: ")
                 val orderChoice = scanner.nextInt()
                 delay(1000)
