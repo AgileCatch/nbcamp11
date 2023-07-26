@@ -37,8 +37,33 @@ class Payment(private val order: Order) {
                         println("1.개인, 2.사업자, 그 외 뒤로가기")
                         val cashReceipt2 = readLine()?.toIntOrNull()
                         when (cashReceipt2) {
-                            1-> {}
-                            2-> {}
+                            1-> {
+                                println("핸드폰번호를 입력해주세요.")
+                                println("0 하나만 누르면 뒤로 돌아갑니다.")
+                                val cashReceipt3 = readLine()?.toIntOrNull()
+                                when (cashReceipt3) {
+                                    0 -> return
+                                    else -> {
+                                        println("해당 번호로 현금영수증 하겠습니다.")
+
+                                    }
+                                }
+                            }
+
+
+                            2-> {
+                                println("사업자번호를 입력해주세요.")
+                                println("0 하나만 누르면 뒤로 돌아갑니다.")
+                                val cashReceipt3 = readLine()?.toIntOrNull()
+                                when (cashReceipt3) {
+                                    0 -> return
+                                    else -> {
+                                        println("해당 번호로 현금영수증 하겠습니다.")
+
+                                    }
+                                }
+
+                            }
                             else -> {
                                 println("잘못된 선택입니다.")
                                 return
@@ -48,13 +73,14 @@ class Payment(private val order: Order) {
                     2 -> {
                         println("결제가 완료되었습니다.")
 
+
                     }
                     else -> {
                         println("잘못된 선택입니다.")
                         return
                     }
                 }
-
+                showReceiptOption()
             }
 
             else -> {
@@ -63,7 +89,7 @@ class Payment(private val order: Order) {
             }
         }
 
-        showReceiptOption()
+
     }
 
     private fun inputCouponCode() {
@@ -90,9 +116,27 @@ class Payment(private val order: Order) {
                 print("결제금액 : ")
                 println("${order.getTotalPrice()}")
                 delay(1000)
+                println("1. 매장  2. 포장  3. 그 외 뒤로가기")
+                val storeOption = readLine()?.toIntOrNull()
+                when (storeOption) {
+                    1 -> true to false
+                    2 -> false to false
+                    else -> {
+                        println("잘못된 선택입니다.")
+                    }
+                }
             }
             2 -> {
                 println("결제가 완료되었습니다.")
+                println("1. 매장  2. 포장  3. 그 외 뒤로가기")
+                val storeOption = readLine()?.toIntOrNull()
+                when (storeOption) {
+                    1 -> true to false
+                    2 -> false to false
+                    else -> {
+                        println("잘못된 선택입니다.")
+                    }
+                }
             }
             else -> {
                 println("잘못된 선택입니다.")
@@ -100,6 +144,7 @@ class Payment(private val order: Order) {
             }
         }
     }
+
 
     private fun printReceipt() {
         println("\"-영수증-\"")
