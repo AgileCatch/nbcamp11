@@ -12,7 +12,7 @@ class Payment(private val order: Order) {
         println("\n\"총 결제 금액\"")
         println("=========")
         println(" ${order.getTotalPrice()}원")
-        println("결제 수단을 선택해주세요: 1. 카드\n2. 쿠폰\n3. 현금\n그 외 뒤로 가기")
+        println("1. 카드\n2. 쿠폰\n3. 현금 \n그 외 뒤로 가기\n결제 수단을 선택해주세요: ")
         val paymentChoice = readLine()?.toIntOrNull()
         delay(1000)
 
@@ -24,7 +24,7 @@ class Payment(private val order: Order) {
             }
             2 -> {
                 paymentOption = "쿠폰"
-                println("1. 뒤로 가기\n쿠폰 번호를 8자리를 입력해주세요:")
+                println("\n쿠폰 번호를 8자리를 입력해주세요(취소하려면 1번을 눌려주세요):")
                 inputCouponCode()
             }
             3 -> {
@@ -105,7 +105,7 @@ class Payment(private val order: Order) {
     }
 
     private suspend fun showReceiptOption() {
-        println("영수증을 발급하시겠습니까? (1.예 2.아니오,그 외 뒤로 가기)")
+        println("영수증을 발급하시겠습니까? \n1.예 \n2.아니오\n그 외 뒤로 가기")
 
         val receiptOption = readLine()?.toIntOrNull()
 
