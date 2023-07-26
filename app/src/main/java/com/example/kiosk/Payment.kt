@@ -1,6 +1,5 @@
 package com.example.kiosk
 
-import java.text.SimpleDateFormat
 import kotlinx.coroutines.delay
 import java.util.Date
 import java.util.Locale
@@ -27,6 +26,7 @@ class Payment(private val order: Order) {
             1 -> {
                 paymentOption = "카드"
                 println("카드 투입구에 카드를 넣어주세요.")
+
             }
             2 -> {
                 paymentOption = "쿠폰"
@@ -136,8 +136,6 @@ class Payment(private val order: Order) {
             }
             2 -> {
                 println("결제가 완료되었습니다.")
-
-                println("결제 시간: ${formatTime(paymentTime)}")
                 println("1. 매장\n2. 포장\n3. 그 외 뒤로가기")
                 val storeOption = readLine()?.toIntOrNull()
                 when (storeOption) {
