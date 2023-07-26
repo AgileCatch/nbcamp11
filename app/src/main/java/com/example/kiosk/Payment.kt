@@ -12,7 +12,7 @@ class Payment(private val order: Order) {
         println("\n\"총 결제 금액\"")
         println("=========")
         println(" ${order.getTotalPrice()}원")
-        println("결제 수단을 선택해주세요: 1. 카드, 2. 쿠폰, 3. 현금, 그 외 뒤로 가기")
+        println("결제 수단을 선택해주세요: 1. 카드\n2. 쿠폰\n3. 현금\n그 외 뒤로 가기")
         val paymentChoice = readLine()?.toIntOrNull()
         delay(1000)
 
@@ -24,17 +24,17 @@ class Payment(private val order: Order) {
             }
             2 -> {
                 paymentOption = "쿠폰"
-                println("1. 뒤로 가기, 쿠폰 번호를 8자리를 입력해주세요:")
+                println("1. 뒤로 가기\n쿠폰 번호를 8자리를 입력해주세요:")
                 inputCouponCode()
             }
             3 -> {
                 paymentOption = "현금"
-                println("현금 영수증을 발급하시겠습니까? 1. 예, 2. 아니오, 그 외 뒤로 가기")
+                println("현금 영수증을 발급하시겠습니까? \n1. 예\n2. 아니오 \n그 외 뒤로 가기")
                 val cashReceipt = readLine()?.toIntOrNull()
 
                 when(cashReceipt) {
                     1 -> {
-                        println("1.개인, 2.사업자, 그 외 뒤로가기")
+                        println("1. 개인\n2. 사업자\n그 외 뒤로가기")
                         val cashReceipt2 = readLine()?.toIntOrNull()
                         when (cashReceipt2) {
                             1-> {
@@ -105,7 +105,7 @@ class Payment(private val order: Order) {
     }
 
     private suspend fun showReceiptOption() {
-        println("영수증을 발급하시겠습니까? (1.예, 2.아니오, 그 외 뒤로 가기)")
+        println("영수증을 발급하시겠습니까? (1.예 2.아니오,그 외 뒤로 가기)")
 
         val receiptOption = readLine()?.toIntOrNull()
 
@@ -116,7 +116,7 @@ class Payment(private val order: Order) {
                 print("결제금액 : ")
                 println("${order.getTotalPrice()}")
                 delay(1000)
-                println("1. 매장  2. 포장  3. 그 외 뒤로가기")
+                println("1. 매장 \n2. 포장 \n3. 그 외 뒤로가기")
                 val storeOption = readLine()?.toIntOrNull()
                 when (storeOption) {
                     1 -> true to false
@@ -128,7 +128,7 @@ class Payment(private val order: Order) {
             }
             2 -> {
                 println("결제가 완료되었습니다.")
-                println("1. 매장  2. 포장  3. 그 외 뒤로가기")
+                println("1. 매장\n2. 포장\n3. 그 외 뒤로가기")
                 val storeOption = readLine()?.toIntOrNull()
                 when (storeOption) {
                     1 -> true to false
@@ -147,7 +147,7 @@ class Payment(private val order: Order) {
 
 
     private fun printReceipt() {
-        println("\"-영수증-\"")
+        println("\"=====영수증=====\"")
 
 
         println("결제 수단: $paymentOption")

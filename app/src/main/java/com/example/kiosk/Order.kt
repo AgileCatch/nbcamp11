@@ -7,16 +7,16 @@ class Order {
 
     fun addToOrder(item: MenuItem, options: String){
         orderList.add(item to options)
-        println("\"${item.name}\"이(가) 장바구니에 추가 되었습니다.")
+        println("\n\"${item.name}\"이(가) 장바구니에 추가 되었습니다.")
         println("선택한 옵션: $options")
     }
 
     fun displayOrder() {
         if (orderList.isEmpty()) {
             println("\n장바구니가 비어있습니다.")
-            println("====메뉴를 선택해주세요====")
+            println("=====메뉴를 선택해주세요=====")
         } else {
-            println("[ | 장바구니 | ]")
+            println("\n[ | 장바구니 | ]")
             for ((menuItem, options) in orderList) {
                 println("${menuItem.name}   | ${menuItem.price}  원  | 선택한 옵션: $options")
             }

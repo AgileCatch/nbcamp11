@@ -9,7 +9,7 @@ class Waiting {
     }
 
     fun printReceiptCount() {
-        println("현재 결제 완료된 항목의 개수: ${completedPayments.size}")
+        println("\n현재 결제 완료된 항목의 개수: ${completedPayments.size}")
     }
 
     fun printWaitingNumber(store: Boolean) {
