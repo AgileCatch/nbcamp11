@@ -4,7 +4,7 @@ class JewelryMenu :Menu{
     private val menuList = ArrayList<MenuItem>()
 
     init {
-        menuList.add(MenuItem("딸기쥬얼리 밀크티   ",3500))
+        menuList.add(MenuItem("딸기쥬얼리 밀크티    ",3500))
         menuList.add(MenuItem("브라슈가쥬얼리 밀크티 ",5500))
 
     }

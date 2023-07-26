@@ -75,7 +75,7 @@ suspend fun main() {
                 print("\n결제금액 :")
                 println("${order.getTotalPrice()}원")
                 println("1. 주문\n2. 메뉴추가")
-                print("주문하려면 1번 다른 메뉴를 보고 싶으면 2번을 눌러주세요: ")
+                println("주문하려면 1번 다른 메뉴를 보고 싶으면 2번을 눌러주세요: ")
                 val orderChoice = scanner.nextInt()
                 delay(1000)
                 when (orderChoice) {

@@ -18,7 +18,7 @@ class Order {
         } else {
             println("\n[ | 장바구니 | ]")
             for ((menuItem, options) in orderList) {
-                println("${menuItem.name}   | ${menuItem.price}  원  | 선택한 옵션: $options")
+                println("${menuItem.name}| ${menuItem.price}원 | 선택한 옵션: $options")
             }
         }
     }
