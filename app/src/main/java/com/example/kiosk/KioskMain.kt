@@ -7,11 +7,7 @@ import java.util.Scanner
 suspend fun main() {
     val scanner = Scanner(System.`in`)
     val teaOption = TeaOption()
-    val coffeeMenu = CoffeeMenu()
-    val bestcomMenu = BestComMenu()
-    val jewelryMenu = JewelryMenu()
-    val milkTMenu = MilkTMenu()
-    val originalTMenu = OriginalTMenu()
+    val menus = listOf(BestComMenu(), CoffeeMenu(), JewelryMenu(), MilkTMenu(), OriginalTMenu())
     val order = Order()
     val payment = Payment(order)
     val waiting = Waiting()
@@ -20,7 +16,7 @@ suspend fun main() {
 
 
     while (true) {
-//        println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
+
         println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
         println("[ 공차 메뉴 ]")
         println("1. 베스트 콤비네이션   | 공차 고객들이 즐겨찾는 티와 토핑의 환상의 조합")
@@ -34,23 +30,23 @@ suspend fun main() {
         print("메뉴 선택:")
         val choice = scanner.nextInt()
 
+
         when (choice) {
-
-            1 -> {
-                bestcomMenu.displayMenu()
+            in 1..menus.size -> {
+                val selectedMenu = menus[choice - 1]
+                selectedMenu.displayMenu()
                 print("선택 ")
-                val bestcomChoice = scanner.nextInt()
-                if (bestcomChoice == 0) continue
-                val menuItem = bestcomMenu.getMenuItem(bestcomChoice)
+                val menuChoice = scanner.nextInt()
+                if (menuChoice == 0) continue
+                val menuItem = selectedMenu.getMenuItem(menuChoice)
                 if (menuItem != null) {
                     teaOption.displayMenu()
-                    print("음료의 옵션을 선택해주셔요:")
+                    print("음료의 옵션을 선택해주세요:")
                     while (true) {
                         val optionChoice = scanner.nextInt()
                         teaOption.displayMenu()
 
                         when (optionChoice) {
-
                             0 -> break //0을 누르면 메뉴판으로 감
                             1 -> teaOption.setHotIceOption(optionChoice)
                             2 -> teaOption.setSweetnessOption(optionChoice)
@@ -59,124 +55,10 @@ suspend fun main() {
                         }
                     }
                     order.addToOrder(menuItem, options = teaOption.getOptions())
-
-                } else if (bestcomChoice != 0) {
+                } else {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
-
-            2 -> {
-                originalTMenu.displayMenu()
-                print("선택 ")
-                val originalTChoice = scanner.nextInt()
-                if (originalTChoice == 0) continue
-                val menuItem = originalTMenu.getMenuItem(originalTChoice)
-                if (menuItem != null) {
-                    teaOption.displayMenu()
-                    print("음료의 옵션을 선택해주셔요:")
-                    while (true) {
-                        val optionChoice = scanner.nextInt()
-                        teaOption.displayMenu()
-
-                        when (optionChoice) {
-
-                            0 -> break //0을 누르면 메뉴판으로 감
-                            1 -> teaOption.setHotIceOption(optionChoice)
-                            2 -> teaOption.setSweetnessOption(optionChoice)
-                            3 -> teaOption.setIceLevelOption(optionChoice)
-                            else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                        }
-                    }
-                    order.addToOrder(menuItem, options = teaOption.getOptions())
-                } else if (originalTChoice != 0) {
-                    println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                }
-            }
-
-            3 -> {
-                milkTMenu.displayMenu()
-                print("선택 ")
-                val milkTChoice = scanner.nextInt()
-                if (milkTChoice == 0) continue
-                val menuItem = milkTMenu.getMenuItem(milkTChoice)
-                if (menuItem != null) {
-                    teaOption.displayMenu()
-                    print("음료의 옵션을 선택해주셔요:")
-                    while (true) {
-                        val optionChoice = scanner.nextInt()
-                        teaOption.displayMenu()
-
-                        when (optionChoice) {
-
-                            0 -> break //0을 누르면 메뉴판으로 감
-                            1 -> teaOption.setHotIceOption(optionChoice)
-                            2 -> teaOption.setSweetnessOption(optionChoice)
-                            3 -> teaOption.setIceLevelOption(optionChoice)
-                            else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                        }
-                    }
-                    order.addToOrder(menuItem, options = teaOption.getOptions())
-                } else if (milkTChoice != 0) {
-                    println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                }
-            }
-
-            4 -> {
-                jewelryMenu.displayMenu()
-                print("선택 ")
-                val jewerlryChoice = scanner.nextInt()
-                if (jewerlryChoice == 0) continue
-                val menuItem = jewelryMenu.getMenuItem(jewerlryChoice)
-                if (menuItem != null) {
-                    teaOption.displayMenu()
-                    print("음료의 옵션을 선택해주셔요:")
-                    while (true) {
-                        val optionChoice = scanner.nextInt()
-                        teaOption.displayMenu()
-
-                        when (optionChoice) {
-
-                            0 -> break //0을 누르면 메뉴판으로 감
-                            1 -> teaOption.setHotIceOption(optionChoice)
-                            2 -> teaOption.setSweetnessOption(optionChoice)
-                            3 -> teaOption.setIceLevelOption(optionChoice)
-                            else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                        }
-                    }
-                    order.addToOrder(menuItem, options = teaOption.getOptions())
-                } else if (jewerlryChoice != 0) {
-                    println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                }
-            }
-
-            5 -> {
-                coffeeMenu.displayMenu()
-                print("선택 ")
-                val coffeeChoice = scanner.nextInt()
-                if (coffeeChoice == 0) continue
-                val menuItem = coffeeMenu.getMenuItem(coffeeChoice)
-                if (menuItem != null) {
-                    teaOption.displayMenu()
-                    print("음료의 옵션을 선택해주셔요:")
-                    while (true) {
-                        val optionChoice = scanner.nextInt()
-                        teaOption.displayMenu()
-
-                        when (optionChoice) {
-
-                            0 -> break //0을 누르면 메뉴판으로 감
-                            1 -> teaOption.setHotIceOption(optionChoice)
-                            2 -> teaOption.setSweetnessOption(optionChoice)
-                            3 -> teaOption.setIceLevelOption(optionChoice)
-                            else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                        }
-                    }
-                    order.addToOrder(menuItem, options = teaOption.getOptions())
-                } else if (coffeeChoice != 0) {
-                    println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                }
-            }
-
             6 -> {
                 if (order.isEmpty()) {
                     println("장바구니가 비어있습니다.")
@@ -199,26 +81,18 @@ suspend fun main() {
                         waiting.printReceiptCount()
                         order.clearOrder()
                     }
-
                     2 -> continue
                     else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
-
-
             7 -> {
-
-                // 취소를 누르면 메뉴판으로 돌아가기
-//                order.clearOrder()
-                println("진행중인 주문이 취소되었어요.")
+                println("진행중인 주문이 취소되었습니다.")
+                order.clearOrder()
                 continue
-
             }
-
-
+            else -> {
+                println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+            }
         }
     }
-
 }
-
-
