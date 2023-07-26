@@ -51,7 +51,13 @@ suspend fun main() {
                             1 -> teaOption.setHotIceOption(optionChoice)
                             2 -> teaOption.setSweetnessOption(optionChoice)
                             3 -> teaOption.setIceLevelOption(optionChoice)
-                            else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                            else -> {
+                                println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                                continue
+                            }
+                        }
+                        if (optionChoice == 3) {
+                            break
                         }
                     }
                     order.addToOrder(menuItem, options = teaOption.getOptions())
@@ -79,7 +85,7 @@ suspend fun main() {
                         waiting.recordCompletedPayment(payment.getPaymentDetails())
                         waiting.printWaitingNumber(false)
                         waiting.printReceiptCount()
-                        order.clearOrder()
+                        order.clearOrder(false)
                     }
                     2 -> continue
                     else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
@@ -87,7 +93,7 @@ suspend fun main() {
             }
             7 -> {
                 println("진행중인 주문이 취소되었습니다.")
-                order.clearOrder()
+                order.clearOrder(true)
                 continue
             }
             else -> {
