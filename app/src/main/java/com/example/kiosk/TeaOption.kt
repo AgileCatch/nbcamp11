@@ -26,6 +26,7 @@ class TeaOption {
             hotIceOption = "ice"
             println("옵션이 변경되었습니다. 현재 옵션: $hotIceOption")
         }
+        displayMenu()
     }
 
     fun setIceLevelOption(optionChoice: Int) {
@@ -81,7 +82,9 @@ class TeaOption {
                 sweetnessOption = "100%"
                 println("당도가 변경되었습니다. 현재 당도: $sweetnessOption")
             }
+
         }
+        displayMenu()
     }
 
     private fun readOptionInput(min: Int, max: Int): Int {
