@@ -24,7 +24,8 @@ class Payment(private val order: Order) {
             }
             2 -> {
                 paymentOption = "쿠폰"
-                println("1. 뒤로 가기, 쿠폰 번호를 8자리를 입력해주세요:")
+                println("1. 뒤로 가기")
+                println("쿠폰 번호를 8자리를 입력해주세요:")
                 inputCouponCode()
             }
             3 -> {
