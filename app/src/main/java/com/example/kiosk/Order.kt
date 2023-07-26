@@ -28,11 +28,13 @@ class Order {
         return orderList.sumOf { it.first.price }
     }
 
-    suspend fun clearOrder(){
+    suspend fun clearOrder(isCanceled: Boolean){
         orderList.clear()
-        println("\"주문이 완료되었습니다.\"")
-        delay(1000)
-        println("\"결제가 완료되었습니다.\"")
+        if (!isCanceled) {
+            println("\"주문이 완료되었습니다.\"")
+            delay(2000)
+            println("\"결제가 완료되었습니다.\"")
+        }
     }
 
     fun isEmpty(): Boolean {
