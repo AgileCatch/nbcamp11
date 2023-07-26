@@ -3,11 +3,12 @@ package com.example.kiosk
 import kotlinx.coroutines.delay
 
 class Order {
-    private val orderList = ArrayList<MenuItem>()
+    private val orderList = ArrayList<Pair<MenuItem, String>>()
 
-    fun addToOrder(item: MenuItem){
-        orderList.add(item)
+    fun addToOrder(item: MenuItem, options: String){
+        orderList.add(item to options)
         println("\"${item.name}\"이(가) 장바구니에 추가 되었습니다.")
+        println("선택한 옵션: $options")
     }
 
     fun displayOrder() {
@@ -16,15 +17,15 @@ class Order {
             println("====메뉴를 선택해주세요====")
         } else {
             println("[ | 장바구니 | ]")
-            for (item in orderList) {
-                println("${item.name}   | ${item.price}  원  | ")
+            for ((menuItem, options) in orderList) {
+                println("${menuItem.name}   | ${menuItem.price}  원  | 선택한 옵션: $options")
             }
         }
     }
 
 
-    fun getTotalPrice(): Int{
-        return orderList.sumOf { it.price }
+    fun getTotalPrice(): Int {
+        return orderList.sumOf { it.first.price }
     }
 
     suspend fun clearOrder(){
