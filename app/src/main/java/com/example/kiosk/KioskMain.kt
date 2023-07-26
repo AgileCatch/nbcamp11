@@ -17,6 +17,8 @@ suspend fun main() {
     println("\n현재 잔액을 입력해주세요 :")
     var cash = scanner.nextInt()
     val won = "원"
+    val teaOption = TeaOption()
+    val toppingOption = ToppingOption()
 
     while (true) {
 //        println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
@@ -43,6 +45,18 @@ suspend fun main() {
                 val menuItem = bestcomMenu.getMenuItem(bestcomChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
+                    toppingOption.displayMenu()
+                    print("선택 ")
+                    val toppingChoice = scanner.nextInt()
+                    val toppingItem = toppingOption.getMenuItem(toppingChoice)
+                    if (toppingItem != null) {
+                        order.addToOrder(toppingItem)
+                        teaOption.displayMenu()
+                        print("선택 ")
+                    }
+                    else if (toppingChoice != 0) {
+                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                    }
                 } else if (bestcomChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
@@ -56,6 +70,18 @@ suspend fun main() {
                 val menuItem = originalTMenu.getMenuItem(originalTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
+                    toppingOption.displayMenu()
+                    print("선택 ")
+                    val toppingChoice = scanner.nextInt()
+                    val toppingItem = toppingOption.getMenuItem(toppingChoice)
+                    if (toppingItem != null) {
+                        order.addToOrder(toppingItem)
+                        teaOption.displayMenu()
+                        print("선택 ")
+                    }
+                    else if (toppingChoice != 0) {
+                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                    }
                 } else if (originalTChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
@@ -69,6 +95,18 @@ suspend fun main() {
                 val menuItem = milkTMenu.getMenuItem(milkTChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
+                    toppingOption.displayMenu()
+                    print("선택 ")
+                    val toppingChoice = scanner.nextInt()
+                    val toppingItem = toppingOption.getMenuItem(toppingChoice)
+                    if (toppingItem != null) {
+                        order.addToOrder(toppingItem)
+                        teaOption.displayMenu()
+                        print("선택 ")
+                    }
+                    else if (toppingChoice != 0) {
+                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                    }
                 } else if (milkTChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
@@ -82,6 +120,18 @@ suspend fun main() {
                 val menuItem = jewelryMenu.getMenuItem(jewerlryChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
+                    toppingOption.displayMenu()
+                    print("선택 ")
+                    val toppingChoice = scanner.nextInt()
+                    val toppingItem = toppingOption.getMenuItem(toppingChoice)
+                    if (toppingItem != null) {
+                        order.addToOrder(toppingItem)
+                        teaOption.displayMenu()
+                        print("선택 ")
+                    }
+                    else if (toppingChoice != 0) {
+                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                    }
                 } else if (jewerlryChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
@@ -95,6 +145,18 @@ suspend fun main() {
                 val menuItem = jewelryMenu.getMenuItem(coffeeChoice)
                 if (menuItem != null) {
                     order.addToOrder(menuItem)
+                    toppingOption.displayMenu()
+                    print("선택 ")
+                    val toppingChoice = scanner.nextInt()
+                    val toppingItem = toppingOption.getMenuItem(toppingChoice)
+                    if (toppingItem != null) {
+                        order.addToOrder(toppingItem)
+                        teaOption.displayMenu()
+                        print("선택 ")
+                    }
+                    else if (toppingChoice != 0) {
+                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                    }
                 } else if (coffeeChoice != 0) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }

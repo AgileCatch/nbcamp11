@@ -6,9 +6,9 @@ class TeaOption {
     var sweetnessOption: String = "10%"
 
     fun displayMenu() {
-        println("1. 온도 설정")
-        println("2. 당도 설정")
-        println("3. 얼음 설정")
+        println("1. 온도 설정 [기본은 hot 입니다.]")
+        println("2. 당도 설정 [기본은 10% 입니다.]")
+        println("3. 얼음 설정 [아이스의 경우 기본은 regular입니다.]")
         println("0. 뒤로가기")
     }
 
