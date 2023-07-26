@@ -1,17 +1,23 @@
 package com.example.kiosk
 
+import java.text.SimpleDateFormat
 import kotlinx.coroutines.delay
+import java.util.Date
+import java.util.Locale
 
 class Payment(private val order: Order) {
     private var paymentOption: String = ""
     private var couponCode: String = ""
     private var cashReceipt: String = ""
+    private var paymentTime: Long = 0L
 
 
     suspend fun startPayment() {
+        paymentTime = System.currentTimeMillis()
         println("\n\"총 결제 금액\"")
         println("=========")
         println(" ${order.getTotalPrice()}원")
+        println("결제 시간: ${formatTime(paymentTime)}")
         println("결제 수단을 선택해주세요: 1. 카드\n2. 쿠폰\n3. 현금\n그 외 뒤로 가기")
         val paymentChoice = readLine()?.toIntOrNull()
         delay(1000)
@@ -21,6 +27,7 @@ class Payment(private val order: Order) {
             1 -> {
                 paymentOption = "카드"
                 println("카드 투입구에 카드를 넣어주세요.")
+
             }
             2 -> {
                 paymentOption = "쿠폰"
@@ -71,8 +78,8 @@ class Payment(private val order: Order) {
                         }
                     }
                     2 -> {
+                        println("결제 시간: ${formatTime(paymentTime)}")
                         println("결제가 완료되었습니다.")
-
 
                     }
                     else -> {
@@ -106,7 +113,7 @@ class Payment(private val order: Order) {
 
     private suspend fun showReceiptOption() {
         println("영수증을 발급하시겠습니까? (1.예 2.아니오,그 외 뒤로 가기)")
-
+        paymentTime = System.currentTimeMillis()
         val receiptOption = readLine()?.toIntOrNull()
 
         when (receiptOption) {
@@ -128,6 +135,8 @@ class Payment(private val order: Order) {
             }
             2 -> {
                 println("결제가 완료되었습니다.")
+
+                println("결제 시간: ${formatTime(paymentTime)}")
                 println("1. 매장\n2. 포장\n3. 그 외 뒤로가기")
                 val storeOption = readLine()?.toIntOrNull()
                 when (storeOption) {
@@ -147,8 +156,9 @@ class Payment(private val order: Order) {
 
 
     private fun printReceipt() {
+        paymentTime = System.currentTimeMillis()
         println("\"=====영수증=====\"")
-
+        println("결제 시간: ${formatTime(paymentTime)}")
 
         println("결제 수단: $paymentOption")
 
@@ -158,6 +168,11 @@ class Payment(private val order: Order) {
         }
 
 
+    }
+
+    private fun formatTime(timeInMillis: Long): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return dateFormat.format(Date(timeInMillis))
     }
 
     fun getPaymentDetails(): String {
