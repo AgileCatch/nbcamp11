@@ -1,15 +1,12 @@
 package com.example.kiosk
-
 import kotlinx.coroutines.delay
-import java.lang.NumberFormatException
 import java.util.InputMismatchException
 import java.util.Scanner
-
-
 
 suspend fun main() {
     val scanner = Scanner(System.`in`)
     val teaOption = TeaOption()
+    val topping = ToppingOption()
     val menus = listOf(BestComMenu(), OriginalTMenu(), MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
     val order = Order()
     val waiting = Waiting()
@@ -39,6 +36,7 @@ suspend fun main() {
             in 1..menus.size -> {
                 val selectedMenu = menus[choice!! - 1]
                 selectedMenu.displayMenu()
+
                 print("음료 선택:")
                 var menuChoice = readLine()?.toIntOrNull()
                 if (menuChoice == null) {
@@ -53,12 +51,24 @@ suspend fun main() {
                     while (true) {
                         try {
                             val optionChoice = scanner.nextInt()
-
                             when (optionChoice) {
                                 0 -> break // 0을 누르면 메뉴판으로 감
                                 1 -> teaOption.setHotIceOption(optionChoice)
                                 2 -> teaOption.setSweetnessOption(optionChoice)
                                 3 -> teaOption.setIceLevelOption(optionChoice)
+                                4 -> {
+                                    while (true) {
+                                        topping.displayMenu()
+                                        print("토핑 선택 : ")
+                                        val toppingChoice = scanner.nextInt()
+                                        if (toppingChoice == 0) {
+                                            break
+                                        } else {
+                                            topping.addTopping(toppingChoice)
+                                            println("선택된 토핑들: ${selectedToppings.joinToString(" ")}")
+                                        }
+                                    }
+                                }
                                 else -> {
                                     println("잘못된 입력입니다. 다시 입력해주세요")
                                     continue
@@ -69,7 +79,7 @@ suspend fun main() {
                             scanner.next()
                         }
                     }
-                    order.addToOrder(menuItem, options = teaOption.getOptions(), payment = payment)
+                    order.addToOrder(menuItem, options = teaOption.getOptions(), toppings = selectedToppings.toList() ,payment = payment)
                 } else {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
@@ -102,18 +112,15 @@ suspend fun main() {
                         order.clearOrder(false)
                         payment.printPaymentTime()
                     }
-
                     2 -> continue
                     else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
-
             7 -> {
                 println("진행중인 주문이 취소되었습니다.")
                 order.clearOrder(true)
                 continue
             }
-
             else -> {
                 println("잘못된 번호를 입력했어요. 다시 입력해주세요")
             }
