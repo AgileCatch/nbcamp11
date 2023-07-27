@@ -1,13 +1,14 @@
 package com.example.kiosk
 
 import kotlinx.coroutines.delay
+import java.lang.NumberFormatException
 import java.util.Scanner
 
 
 suspend fun main() {
     val scanner = Scanner(System.`in`)
     val teaOption = TeaOption()
-    val menus = listOf(BestComMenu(),OriginalTMenu(),MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
+    val menus = listOf(BestComMenu(), OriginalTMenu(), MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
     val order = Order()
     val payment = Payment(order)
     val waiting = Waiting()
@@ -28,22 +29,26 @@ suspend fun main() {
         println("7. Cancel         | 진행중인 주문을 취소합니다.")
 
         print("메뉴 선택:")
-        val choice = scanner.nextInt()
 
+        val choice = readLine()?.toIntOrNull()
 
         when (choice) {
             in 1..menus.size -> {
-                val selectedMenu = menus[choice - 1]
+                val selectedMenu = menus[choice!! - 1]
                 selectedMenu.displayMenu()
                 print("음료 선택:")
-                val menuChoice = scanner.nextInt()
+                var menuChoice = readLine()?.toIntOrNull()
+                if (menuChoice == null) {
+                    println("잘못된 번호를 입력했어요. 다시 입력해주세요.")
+                    menuChoice = readLine()?.toIntOrNull()
+                }
                 if (menuChoice == 0) continue
-                val menuItem = selectedMenu.getMenuItem(menuChoice)
+                val menuItem = selectedMenu.getMenuItem(menuChoice!!)
                 if (menuItem != null) {
                     teaOption.displayMenu()
                     print("옵션 선택:")
                     while (true) {
-                        val optionChoice = scanner.nextInt()
+                        val optionChoice = readLine()?.toIntOrNull()
 //                        teaOption.displayMenu()
 
                         when (optionChoice) {
@@ -65,6 +70,7 @@ suspend fun main() {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             6 -> {
                 if (order.isEmpty()) {
                     println("장바구니가 비어있습니다.")
@@ -76,7 +82,7 @@ suspend fun main() {
                 println("${order.getTotalPrice()}원")
                 println("1. 주문\n2. 메뉴추가")
                 println("주문하려면 1번 다른 메뉴를 보고 싶으면 2번을 눌러주세요: ")
-                val orderChoice = scanner.nextInt()
+                val orderChoice = readLine()?.toIntOrNull()
                 delay(1000)
                 when (orderChoice) {
                     1 -> {
@@ -87,15 +93,18 @@ suspend fun main() {
                         waiting.printReceiptCount()
                         order.clearOrder(false)
                     }
+
                     2 -> continue
                     else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             7 -> {
                 println("진행중인 주문이 취소되었습니다.")
                 order.clearOrder(true)
                 continue
             }
+
             else -> {
                 println("잘못된 번호를 입력했어요. 다시 입력해주세요")
             }
