@@ -64,9 +64,6 @@ suspend fun main() {
                                     continue
                                 }
                             }
-                            if (optionChoice == 3) {
-                                break
-                            }
                         } catch (e: InputMismatchException) {
                             println("잘못된 입력입니다. 숫자를 입력해주세요.")
                             scanner.next()
