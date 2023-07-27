@@ -2,6 +2,7 @@ package com.example.kiosk
 
 import kotlinx.coroutines.delay
 import java.lang.NumberFormatException
+import java.util.InputMismatchException
 import java.util.Scanner
 
 
@@ -48,21 +49,25 @@ suspend fun main() {
                     teaOption.displayMenu()
                     print("옵션 선택:")
                     while (true) {
-                        val optionChoice = readLine()?.toIntOrNull()
-//                        teaOption.displayMenu()
+                        try {
+                            val optionChoice = scanner.nextInt()
 
-                        when (optionChoice) {
-                            0 -> break //0을 누르면 메뉴판으로 감
-                            1 -> teaOption.setHotIceOption(optionChoice)
-                            2 -> teaOption.setSweetnessOption(optionChoice)
-                            3 -> teaOption.setIceLevelOption(optionChoice)
-                            else -> {
-                                println("잘못된 번호를 입력했어요. 다시 입력해주세요")
-                                continue
+                            when (optionChoice) {
+                                0 -> break // 0을 누르면 메뉴판으로 감
+                                1 -> teaOption.setHotIceOption(optionChoice)
+                                2 -> teaOption.setSweetnessOption(optionChoice)
+                                3 -> teaOption.setIceLevelOption(optionChoice)
+                                else -> {
+                                    println("잘못된 입력입니다. 다시 입력해주세요")
+                                    continue
+                                }
                             }
-                        }
-                        if (optionChoice == 3) {
-                            break
+                            if (optionChoice == 3) {
+                                break
+                            }
+                        } catch (e: InputMismatchException) {
+                            println("잘못된 입력입니다. 숫자를 입력해주세요.")
+                            scanner.next()
                         }
                     }
                     order.addToOrder(menuItem, options = teaOption.getOptions())
@@ -70,7 +75,6 @@ suspend fun main() {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
-
             6 -> {
                 if (order.isEmpty()) {
                     println("장바구니가 비어있습니다.")
