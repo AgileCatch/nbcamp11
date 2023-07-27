@@ -11,8 +11,8 @@ class Payment(private val order: Order, private val waiting: Waiting) {
     private var currentNumber = 0
     private var selectedMenu: MenuItem? = null
     private var selectedOptions: String = ""
-    private val blockedPayStartTime = LocalTime.of(13, 0) // 결제 가능 시작 시간
-    private val blockedPayEndTime = LocalTime.of(14, 0)   // 결제 가능 종료 시간
+    private val blockedPayStartTime = LocalTime.of(13, 0)
+    private val blockedPayEndTime = LocalTime.of(14, 0)
 
     fun isPaymentAllowed(): Boolean {
         val now = LocalTime.now()
@@ -38,9 +38,10 @@ class Payment(private val order: Order, private val waiting: Waiting) {
                 1 -> {
                     paymentOption = "카드"
                     println("카드 투입구에 카드를 넣어주세요.")
-                    selectedMenu?.let {order.addToOrder(it, selectedOptions, this) }
+
                     showReceiptOption()
                     goBack = false
+
                 }
 
                 2 -> {
@@ -139,6 +140,7 @@ class Payment(private val order: Order, private val waiting: Waiting) {
             }
 
         }
+
         }
 
          suspend fun showReceiptOption() {
@@ -227,9 +229,11 @@ class Payment(private val order: Order, private val waiting: Waiting) {
         }
     fun printWaitingNumberForStore() {
         println("매장 결제 대기 번호표: ${currentNumber + 100}")
+        println("현재 대기 인원 수 ${currentNumber}")
     }
     fun printWaitingNumberForTakeout() {
         println("포장 결제 대기 번호표: ${currentNumber + 200}")
+        println("현재 대기 인원 수 ${currentNumber}")
     }
 
     fun getCurrentNumber(): Int {

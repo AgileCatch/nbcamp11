@@ -4,9 +4,7 @@ import kotlinx.coroutines.delay
 import java.lang.NumberFormatException
 import java.util.InputMismatchException
 import java.util.Scanner
-import java.time.LocalTime
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+
 
 
 suspend fun main() {
@@ -16,7 +14,7 @@ suspend fun main() {
     val order = Order()
     val waiting = Waiting()
     val payment = Payment(order, waiting)
-    val currentNumber = payment.getCurrentNumber()
+
 
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
 
@@ -104,7 +102,6 @@ suspend fun main() {
                         payment.completePayment()
                         waiting.recordCompletedPayment(payment.getPaymentDetails(), true)
                         waiting.recordCompletedPayment(payment.getPaymentDetails(), false)
-                        waiting.printWaitingNumber(false)
                         order.clearOrder(false)
                         payment.printPaymentTime()
                     }
