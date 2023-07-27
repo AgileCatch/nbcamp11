@@ -2,6 +2,9 @@ package com.example.kiosk
 
 import kotlinx.coroutines.delay
 import java.util.Scanner
+import java.time.LocalTime
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 suspend fun main() {
@@ -81,13 +84,19 @@ suspend fun main() {
                 delay(1000)
                 when (orderChoice) {
                     1 -> {
+                        if (!payment.isPaymentAllowed()) {
+                            println("현재는 점심시간이라, 결제를 할 수 없는 시간대입니다. \n13:00부터 14:00까지 결제가 불가능합니다.")
+                            continue
+                        }
+
                         payment.startPayment()
                         delay(2000)
+                        payment.completePayment()
                         waiting.recordCompletedPayment(payment.getPaymentDetails(), true)
                         waiting.recordCompletedPayment(payment.getPaymentDetails(), false)
                         waiting.printWaitingNumber(false)
-
                         order.clearOrder(false)
+                        payment.printPaymentTime()
                     }
                     2 -> continue
                     else -> println("잘못된 번호를 입력했어요. 다시 입력해주세요")

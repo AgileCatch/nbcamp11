@@ -1,5 +1,8 @@
 package com.example.kiosk
 
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.time.LocalTime
 import kotlinx.coroutines.delay
 
 class Payment(private val order: Order, private val waiting: Waiting) {
@@ -8,6 +11,14 @@ class Payment(private val order: Order, private val waiting: Waiting) {
     private var currentNumber = 0
     private var selectedMenu: MenuItem? = null
     private var selectedOptions: String = ""
+    private val blockedPayStartTime = LocalTime.of(13, 0) // 결제 가능 시작 시간
+    private val blockedPayEndTime = LocalTime.of(14, 0)   // 결제 가능 종료 시간
+
+    fun isPaymentAllowed(): Boolean {
+        val now = LocalTime.now()
+        return now < blockedPayStartTime || now >= blockedPayEndTime
+    }
+
 
 
 
@@ -228,5 +239,19 @@ class Payment(private val order: Order, private val waiting: Waiting) {
         selectedMenu = item
         selectedOptions = options
     }
+
+    private var paymentTime: LocalDateTime? = null
+    fun completePayment() {
+        paymentTime = LocalDateTime.now()
+    }
+
+    fun printPaymentTime() {
+        paymentTime?.let {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            val formattedTime = it.format(formatter)
+            println("결제 완료 시간: $formattedTime")
+        } ?: println("결제가 완료되지 않았습니다.")
+    }
+
 
     }
