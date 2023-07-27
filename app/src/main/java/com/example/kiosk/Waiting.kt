@@ -2,11 +2,19 @@ package com.example.kiosk
 
 class Waiting {
     private val completedPayments = mutableListOf<String>()
-    private var currentNumber = 0
+    private var storeCurrentNumber = 0
+    private var takeoutCurrentNumber = 0
 
-    fun recordCompletedPayment(payment: String) {
+
+    fun recordCompletedPayment(payment: String, store: Boolean) {
         completedPayments.add(payment)
+        if (store) {
+            storeCurrentNumber += 1
+        } else {
+            takeoutCurrentNumber += 1
+        }
     }
+
 
     fun printReceiptCount() {
         println("\n현재 결제 완료된 항목의 개수: ${completedPayments.size}")
@@ -14,10 +22,11 @@ class Waiting {
 
     fun printWaitingNumber(store: Boolean) {
         if (store) {
-            println("매장 결제 대기 번호표: $currentNumber")
+            println("매장 결제 대기 번호표: $storeCurrentNumber")
         } else {
-            currentNumber += 1
-            println("포장 결제 대기 번호표: $currentNumber")
+            println("포장 결제 대기 번호표: $takeoutCurrentNumber")
         }
     }
+
+
 }

@@ -6,6 +6,7 @@ class Payment(private val order: Order) {
     private var paymentOption: String = ""
     private var couponCode: String = ""
     private var cashReceipt: String = ""
+    private var currentNumber = 0
 
 
     suspend fun startPayment() {
@@ -131,8 +132,14 @@ class Payment(private val order: Order) {
                     println("1. 매장 \n2. 포장 \n3. 그 외 뒤로가기")
                     val storeOption = readLine()?.toIntOrNull()
                     when (storeOption) {
-                        1 -> true to false
-                        2 -> false to false
+                        1 -> {
+                            printWaitingNumberForStore()
+                            currentNumber += 1
+                        }
+                        2 -> {
+                            printWaitingNumberForTakeout()
+                            currentNumber += 1
+                        }
                         else -> {
                             println("잘못된 선택입니다.")
                         }
@@ -144,8 +151,14 @@ class Payment(private val order: Order) {
                     println("1. 매장\n2. 포장\n3. 그 외 뒤로가기")
                     val storeOption = readLine()?.toIntOrNull()
                     when (storeOption) {
-                        1 -> true to false
-                        2 -> false to false
+                        1 -> {
+                            printWaitingNumberForStore()
+                            currentNumber += 1
+                        }
+                        2 -> {
+                            printWaitingNumberForTakeout()
+                            currentNumber += 1
+                        }
                         else -> {
                             println("잘못된 선택입니다.")
                         }
@@ -176,4 +189,15 @@ class Payment(private val order: Order) {
         fun getPaymentDetails(): String {
             return paymentOption
         }
+    fun printWaitingNumberForStore() {
+        println("매장 결제 대기 번호표: ${currentNumber + 100}")
+    }
+    fun printWaitingNumberForTakeout() {
+        println("포장 결제 대기 번호표: ${currentNumber + 200}")
+    }
+
+    fun getCurrentNumber(): Int {
+        return currentNumber
+    }
+
     }

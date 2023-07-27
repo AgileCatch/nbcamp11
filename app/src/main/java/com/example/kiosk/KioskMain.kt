@@ -11,6 +11,7 @@ suspend fun main() {
     val order = Order()
     val payment = Payment(order)
     val waiting = Waiting()
+    val currentNumber = payment.getCurrentNumber()
 
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
 
@@ -82,7 +83,7 @@ suspend fun main() {
                     1 -> {
                         payment.startPayment()
                         delay(2000)
-                        waiting.recordCompletedPayment(payment.getPaymentDetails())
+//                        waiting.recordCompletedPayment(payment.getPaymentDetails())
                         waiting.printWaitingNumber(false)
                         waiting.printReceiptCount()
                         order.clearOrder(false)
