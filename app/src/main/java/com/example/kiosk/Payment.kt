@@ -17,14 +17,17 @@ class Payment(private val order: Order, private val waiting: Waiting) {
     private val blockedPayStartTime = LocalTime.of(13, 0) // 결제 가능 시작 시간
     private val blockedPayEndTime = LocalTime.of(14, 0)   // 결제 가능 종료 시간
 
+
+    private var paymentTime: LocalDateTime? = null
+
+
+
+
+
     fun isPaymentAllowed(): Boolean {
         val now = LocalTime.now()
         return now < blockedPayStartTime || now >= blockedPayEndTime
     }
-
-
-
-
 
     suspend fun startPayment() {
         var goBack = true
@@ -41,8 +44,8 @@ class Payment(private val order: Order, private val waiting: Waiting) {
                 1 -> {
                     paymentOption = "카드"
                     println("카드 투입구에 카드를 넣어주세요.")
-                    selectedMenu?.let {order.addToOrder(it, selectedOptions, this) }
                     showReceiptOption()
+
                     goBack = false
                 }
 
@@ -144,9 +147,10 @@ class Payment(private val order: Order, private val waiting: Waiting) {
         }
         }
 
+
          suspend fun showReceiptOption() {
             println("영수증을 발급하시겠습니까? \n1.예 \n2.아니오\n그 외 뒤로 가기")
-
+             completePayment()
             val receiptOption = readLine()?.toIntOrNull()
 
             when (receiptOption) {
@@ -210,11 +214,10 @@ class Payment(private val order: Order, private val waiting: Waiting) {
             }
         }
 
-
         private fun printReceipt() {
             println("\"=====영수증=====\"")
             println("${selectedMenu?.name}| ${selectedMenu?.price}원 | 선택한 옵션: $selectedOptions")
-
+            printPaymentTime()
             println("결제 수단: $paymentOption")
 
             when (paymentOption) {
@@ -222,38 +225,38 @@ class Payment(private val order: Order, private val waiting: Waiting) {
                 "현금" -> println("현금 영수증 발급: (${selectedMenu?.price})")
             }
 
-
         }
-
-        fun getPaymentDetails(): String {
+    fun getPaymentDetails(): String {
             return paymentOption
         }
     fun printWaitingNumberForStore() {
         println("매장 결제 대기 번호표: ${currentNumber + 100}")
     }
+
     fun printWaitingNumberForTakeout() {
         println("포장 결제 대기 번호표: ${currentNumber + 200}")
     }
-
     fun getCurrentNumber(): Int {
         return currentNumber
     }
+
     fun updateMenuItemInfo(item: MenuItem, options: String) {
         selectedMenu = item
         selectedOptions = options
     }
-
-    private var paymentTime: LocalDateTime? = null
     fun completePayment() {
         paymentTime = LocalDateTime.now()
     }
 
+
     fun printPaymentTime() {
-        paymentTime?.let {
-            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            val formattedTime = it.format(formatter)
-            println("결제 완료 시간: $formattedTime")
-        } ?: println("결제가 완료되지 않았습니다.")
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val formattedTime = paymentTime?.format(formatter) ?: "결제가 완료되지 않았습니다."
+        println("결제 완료 시간: $formattedTime")
+    }
+    private fun formatTime(timeInMillis: Long): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        return dateFormat.format(Date(timeInMillis))
     }
 
 

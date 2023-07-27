@@ -15,9 +15,9 @@ suspend fun main() {
     val menus = listOf(BestComMenu(), OriginalTMenu(), MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
     val order = Order()
     val waiting = Waiting()
-    waiting.printWaiting(false)
     val payment = Payment(order, waiting)
     val currentNumber = payment.getCurrentNumber()
+    val toppingOption = ToppingOption()
 
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
 
@@ -35,8 +35,6 @@ suspend fun main() {
         println("7. Cancel         | 진행중인 주문을 취소합니다.")
 
         print("메뉴 선택:")
-        val choice = scanner.nextInt()
-
         val choice = readLine()?.toIntOrNull()
 
         when (choice) {
@@ -53,6 +51,7 @@ suspend fun main() {
                 val menuItem = selectedMenu.getMenuItem(menuChoice!!)
                 if (menuItem != null) {
                     teaOption.displayMenu()
+                    toppingOption.displayMenu1()
                     print("옵션 선택:")
                     while (true) {
                         try {
@@ -63,12 +62,19 @@ suspend fun main() {
                                 1 -> teaOption.setHotIceOption(optionChoice)
                                 2 -> teaOption.setSweetnessOption(optionChoice)
                                 3 -> teaOption.setIceLevelOption(optionChoice)
+                                4 -> {
+
+                                    toppingOption.displayMenu1()
+                                    toppingOption.selectToppings()
+                                    toppingOption.getAdditionalToppingPrice()
+                                }
+
                                 else -> {
                                     println("잘못된 입력입니다. 다시 입력해주세요")
                                     continue
                                 }
                             }
-                            if (optionChoice == 3) {
+                            if (optionChoice == 4) {
                                 break
                             }
                         } catch (e: InputMismatchException) {
@@ -107,8 +113,6 @@ suspend fun main() {
                         waiting.recordCompletedPayment(payment.getPaymentDetails(), true)
                         waiting.recordCompletedPayment(payment.getPaymentDetails(), false)
                         waiting.printWaitingNumber(false)
-                        waiting.printWaiting(true)
-                        waiting.printReceiptCount()
                         order.clearOrder(false)
                         payment.printPaymentTime()
                     }
