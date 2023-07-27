@@ -51,6 +51,7 @@ class TeaOption {
                 println("얼음 옵션이 변경되었습니다. 현재 옵션: $iceLevelOption")
             }
         }
+        displayMenu()
     }
 
     fun setSweetnessOption(optionChoice: Int) {

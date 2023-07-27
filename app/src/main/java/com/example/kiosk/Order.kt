@@ -7,10 +7,11 @@ import kotlinx.coroutines.launch
 class Order {
     private val orderList = ArrayList<Pair<MenuItem, String>>()
 
-    fun addToOrder(item: MenuItem, options: String){
+    fun addToOrder(item: MenuItem, options: String, payment: Payment){
         orderList.add(item to options)
         println("\n\"${item.name}\"이(가) 장바구니에 추가 되었습니다.")
         println("선택한 옵션: $options")
+        payment.updateMenuItemInfo(item, options)
     }
 
     fun displayOrder() {
