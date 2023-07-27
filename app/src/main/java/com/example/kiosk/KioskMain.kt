@@ -83,7 +83,8 @@ suspend fun main() {
                     1 -> {
                         payment.startPayment()
                         delay(2000)
-//                        waiting.recordCompletedPayment(payment.getPaymentDetails())
+                        waiting.recordCompletedPayment(payment.getPaymentDetails(),true)
+                        waiting.recordCompletedPayment(payment.getPaymentDetails(),false)
                         waiting.printWaitingNumber(false)
                         waiting.printReceiptCount()
                         order.clearOrder(false)
