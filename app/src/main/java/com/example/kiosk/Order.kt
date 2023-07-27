@@ -1,6 +1,8 @@
 package com.example.kiosk
 
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class Order {
     private val orderList = ArrayList<Pair<MenuItem, String>>()

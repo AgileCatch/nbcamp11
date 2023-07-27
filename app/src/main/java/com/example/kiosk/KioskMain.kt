@@ -12,6 +12,7 @@ suspend fun main() {
     val order = Order()
     val payment = Payment(order)
     val waiting = Waiting()
+    waiting.printWaiting(false)
 
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
 
@@ -115,6 +116,7 @@ suspend fun main() {
                         delay(2000)
                         waiting.recordCompletedPayment(payment.getPaymentDetails())
                         waiting.printWaitingNumber(false)
+                        waiting.printWaiting(true)
                         waiting.printReceiptCount()
                         order.clearOrder(false)
                     }

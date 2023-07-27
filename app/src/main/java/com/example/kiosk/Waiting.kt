@@ -1,5 +1,9 @@
 package com.example.kiosk
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+
 class Waiting {
     private val completedPayments = mutableListOf<String>()
     private var currentNumber = 0
@@ -18,6 +22,16 @@ class Waiting {
         } else {
             currentNumber += 1
             println("포장 결제 대기 번호표: $currentNumber")
+        }
+    }
+
+
+    fun printWaiting(store: Boolean) {
+        GlobalScope.launch {
+            while (true) {
+                delay(5000)
+                printWaitingNumber(store)
+            }
         }
     }
 }
