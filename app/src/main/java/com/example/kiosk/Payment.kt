@@ -2,11 +2,14 @@ package com.example.kiosk
 
 import kotlinx.coroutines.delay
 
-class Payment(private val order: Order) {
+class Payment(private val order: Order, private val waiting: Waiting) {
     private var paymentOption: String = ""
     private var couponCode: String = ""
-    private var cashReceipt: String = ""
     private var currentNumber = 0
+    private var selectedMenu: MenuItem? = null
+    private var selectedOptions: String = ""
+
+
 
 
     suspend fun startPayment() {
@@ -24,6 +27,8 @@ class Payment(private val order: Order) {
                 1 -> {
                     paymentOption = "카드"
                     println("카드 투입구에 카드를 넣어주세요.")
+                    selectedMenu?.let {order.addToOrder(it, selectedOptions, this) }
+                    showReceiptOption()
                     goBack = false
                 }
 
@@ -37,13 +42,18 @@ class Payment(private val order: Order) {
                             break
                         } else if (input != null && input.matches(Regex("\\d{8}"))) {
                             couponCode = input
-                            goBack = false
+
                             println("쿠폰이 등록되었습니다.")
+                            showReceiptOption()
+                            goBack = false
                             break
+
+
                         } else {
                             println("잘못된 양식입니다. 8자리 숫자로 다시 입력해주세요.")
                         }
                     }
+
                 }
 
                 3 -> {
@@ -64,6 +74,7 @@ class Payment(private val order: Order) {
                                         0 -> goBack = true
                                         else -> {
                                             println("해당 번호로 현금영수증 하겠습니다.")
+                                            showReceiptOption()
                                             goBack = false
 
                                         }
@@ -79,6 +90,7 @@ class Payment(private val order: Order) {
                                         0 -> goBack = true
                                         else -> {
                                             println("해당 번호로 현금영수증 하겠습니다.")
+                                            showReceiptOption()
                                             goBack = false
 
                                         }
@@ -95,6 +107,7 @@ class Payment(private val order: Order) {
 
                         2 -> {
                             println("결제가 완료되었습니다.")
+                            showReceiptOption()
                             goBack = false
 
 
@@ -105,7 +118,7 @@ class Payment(private val order: Order) {
                             goBack = true
                         }
                     }
-                    showReceiptOption()
+
                 }
 
                 else -> {
@@ -134,14 +147,21 @@ class Payment(private val order: Order) {
                     when (storeOption) {
                         1 -> {
                             printWaitingNumberForStore()
-                            currentNumber += 1
+                            waiting.recordCompletedPayment(getPaymentDetails(), true)
+                            currentNumber++
+                            return
                         }
+
                         2 -> {
                             printWaitingNumberForTakeout()
-                            currentNumber += 1
+                            waiting.recordCompletedPayment(getPaymentDetails(), false)
+                            currentNumber++
+                            return
+
                         }
                         else -> {
                             println("잘못된 선택입니다.")
+                            return
                         }
                     }
                 }
@@ -153,14 +173,19 @@ class Payment(private val order: Order) {
                     when (storeOption) {
                         1 -> {
                             printWaitingNumberForStore()
-                            currentNumber += 1
+                            waiting.recordCompletedPayment(getPaymentDetails(), true)
+                            currentNumber++
+                            return
                         }
                         2 -> {
                             printWaitingNumberForTakeout()
-                            currentNumber += 1
+                            waiting.recordCompletedPayment(getPaymentDetails(), false)
+                            currentNumber++
+                            return
                         }
                         else -> {
                             println("잘못된 선택입니다.")
+                            return
                         }
                     }
                 }
@@ -174,13 +199,13 @@ class Payment(private val order: Order) {
 
         private fun printReceipt() {
             println("\"=====영수증=====\"")
-
+            println("${selectedMenu?.name}| ${selectedMenu?.price}원 | 선택한 옵션: $selectedOptions")
 
             println("결제 수단: $paymentOption")
 
             when (paymentOption) {
                 "쿠폰" -> println("쿠폰 번호: $couponCode")
-                "현금" -> println("현금 영수증 발급: ($cashReceipt)")
+                "현금" -> println("현금 영수증 발급: (${selectedMenu?.price})")
             }
 
 
@@ -198,6 +223,10 @@ class Payment(private val order: Order) {
 
     fun getCurrentNumber(): Int {
         return currentNumber
+    }
+    fun updateMenuItemInfo(item: MenuItem, options: String) {
+        selectedMenu = item
+        selectedOptions = options
     }
 
     }

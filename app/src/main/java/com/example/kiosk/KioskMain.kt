@@ -9,8 +9,8 @@ suspend fun main() {
     val teaOption = TeaOption()
     val menus = listOf(BestComMenu(),OriginalTMenu(),MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
     val order = Order()
-    val payment = Payment(order)
     val waiting = Waiting()
+    val payment = Payment(order, waiting)
     val currentNumber = payment.getCurrentNumber()
 
     println("\n\"어서오세요. 공들여 맛있는 공차입니다.\"")
@@ -61,7 +61,7 @@ suspend fun main() {
                             break
                         }
                     }
-                    order.addToOrder(menuItem, options = teaOption.getOptions())
+                    order.addToOrder(menuItem, options = teaOption.getOptions(), payment = payment)
                 } else {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
@@ -83,10 +83,10 @@ suspend fun main() {
                     1 -> {
                         payment.startPayment()
                         delay(2000)
-                        waiting.recordCompletedPayment(payment.getPaymentDetails(),true)
-                        waiting.recordCompletedPayment(payment.getPaymentDetails(),false)
+                        waiting.recordCompletedPayment(payment.getPaymentDetails(), true)
+                        waiting.recordCompletedPayment(payment.getPaymentDetails(), false)
                         waiting.printWaitingNumber(false)
-                        waiting.printReceiptCount()
+
                         order.clearOrder(false)
                     }
                     2 -> continue
