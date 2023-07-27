@@ -2,7 +2,7 @@ package com.example.kiosk
 
 class ToppingOpion {
     private val menuList = ArrayList<ToppingItem>()
-    val selectedToppings = ArrayList<ToppingItem>() // 사용자가 선택한 토핑을 저장하는 리스트
+    val selectedToppings1 = ArrayList<ToppingItem>() // 사용자가 선택한 토핑을 저장하는 리스트
 
     init {
         menuList.add(ToppingItem("펄 ", 500))
@@ -13,28 +13,29 @@ class ToppingOpion {
         menuList.add(ToppingItem("치즈폼 ", 700))
     }
 
-    fun displayMenu() {
+    fun displaymenu2(){
+        println("4. 토핑 옵션 추가")
+    }
+
+    fun displayMenu1(optionChoice: Int) {
         println("[ Tea Option ]")
         for ((index, item) in menuList.withIndex()) {
             println("${index + 1}. ${item.name}   |${item.price} 원|")
         }
+        println("${menuList.size + 1}. 추가토핑")
     }
 
-    fun getMenuItem(index: Int): ToppingItem? {
+    fun getMenuItem1(index: Int): ToppingItem? {
         return if (index in 1..menuList.size) menuList[index - 1] else null
     }
 
-    fun selectTopping(topping: ToppingItem): Boolean {
-        if (selectedToppings.size >= 3) {
+    fun selectTopping1(topping: ToppingItem): Boolean {
+        if (selectedToppings1.size >= 3) {
             println("최대 3개의 토핑만 선택할 수 있습니다.")
             return false
         }
 
-        selectedToppings.add(topping)
+        selectedToppings1.add(topping)
         return true
-    }
-
-    fun getSelectedToppings(): List<ToppingItem> {
-        return selectedToppings
     }
 }

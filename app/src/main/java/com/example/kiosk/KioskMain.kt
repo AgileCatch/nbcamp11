@@ -7,7 +7,8 @@ import java.util.Scanner
 suspend fun main() {
     val scanner = Scanner(System.`in`)
     val teaOption = TeaOption()
-    val menus = listOf(BestComMenu(),OriginalTMenu(),MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
+    val toppingOpion = ToppingOpion()
+    val menus = listOf(BestComMenu(),OriginalTMenu(),MilkTMenu(), JewelryMenu(), CoffeeMenu())
     val order = Order()
     val payment = Payment(order)
     val waiting = Waiting()
@@ -41,6 +42,7 @@ suspend fun main() {
                 val menuItem = selectedMenu.getMenuItem(menuChoice)
                 if (menuItem != null) {
                     teaOption.displayMenu()
+                    toppingOpion.displaymenu2()
                     print("옵션 선택:")
                     while (true) {
                         val optionChoice = scanner.nextInt()
@@ -51,6 +53,35 @@ suspend fun main() {
                             1 -> teaOption.setHotIceOption(optionChoice)
                             2 -> teaOption.setSweetnessOption(optionChoice)
                             3 -> teaOption.setIceLevelOption(optionChoice)
+                            4 ->   {
+                                toppingOpion.displayMenu1(optionChoice)
+                                print("토핑 선택:")
+                                val toppingChoice = scanner.nextInt()
+                                if (toppingChoice == 0) continue
+                                if (toppingChoice == toppingOpion.selectedToppings1.size + 1) {
+                                    toppingOpion.displayMenu1(optionChoice)
+                                    print("추가 토핑 선택:")
+                                    val additionalToppingChoice = scanner.nextInt()
+                                    if (additionalToppingChoice == 0) continue
+                                    val additionalToppingItem = toppingOpion.getMenuItem1(additionalToppingChoice)
+                                    if (additionalToppingItem != null) {
+                                        if (toppingOpion.selectTopping1(additionalToppingItem)) {
+                                            println("${additionalToppingItem.name} 토핑이 추가되었습니다.")
+                                        }
+                                    } else {
+                                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                                    }
+                                } else {
+                                    val toppingItem = toppingOpion.getMenuItem1(toppingChoice)
+                                    if (toppingItem != null) {
+                                        if (toppingOpion.selectTopping1(toppingItem)) {
+                                            println("${toppingItem.name} 토핑이 추가되었습니다.")
+                                        }
+                                    } else {
+                                        println("잘못된 번호를 입력했어요. 다시 입력해주세요")
+                                    }
+                                }
+                            }
                             else -> {
                                 println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                                 continue
