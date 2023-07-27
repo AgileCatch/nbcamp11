@@ -12,6 +12,7 @@ class TeaOption {
         println("1. ICE/HOT 설정")
         println("2. 당도 설정")
         println("3. 얼음량 설정")
+        println("4. 토핑 추가")
         println("0. 뒤로가기")
     }
 

@@ -1,16 +1,14 @@
 package com.example.kiosk
 
 import kotlinx.coroutines.delay
-import java.lang.NumberFormatException
 import java.util.InputMismatchException
 import java.util.Scanner
-
-
 
 suspend fun main() {
     val scanner = Scanner(System.`in`)
     val teaOption = TeaOption()
-    val menus = listOf(BestComMenu(), OriginalTMenu(), MilkTMenu(), JewelryMenu(), CoffeeMenu(),)
+    val topping = ToppingOption()
+    val menus = listOf(BestComMenu(), OriginalTMenu(), MilkTMenu(), JewelryMenu(), CoffeeMenu())
     val order = Order()
     val waiting = Waiting()
     val payment = Payment(order, waiting)
@@ -20,7 +18,7 @@ suspend fun main() {
 
 
     while (true) {
-
+        //메뉴판
         println("\n아래 메뉴판을 보시고 메뉴를 골라 입력해주세요")
         println("[ 공차 메뉴 ]")
         println("1. 베스트 콤비네이션   | 공차 고객들이 즐겨찾는 티와 토핑의 환상의 조합")
@@ -34,31 +32,34 @@ suspend fun main() {
         print("메뉴 선택:")
 
         val choice = readLine()?.toIntOrNull()
-
+        //메뉴 선택후 상세메뉴판
         when (choice) {
             in 1..menus.size -> {
                 val selectedMenu = menus[choice!! - 1]
                 selectedMenu.displayMenu()
+
                 print("음료 선택:")
                 var menuChoice = readLine()?.toIntOrNull()
                 if (menuChoice == null) {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요.")
                     menuChoice = readLine()?.toIntOrNull()
                 }
+                //음료 옵션추가부분
                 if (menuChoice == 0) continue
                 val menuItem = selectedMenu.getMenuItem(menuChoice!!)
                 if (menuItem != null) {
-                    teaOption.displayMenu()
-                    print("옵션 선택:")
                     while (true) {
                         try {
+                            teaOption.displayMenu()
+                            print("옵션 선택:")
                             val optionChoice = scanner.nextInt()
-
                             when (optionChoice) {
+                                //토핑추가부분
                                 0 -> break // 0을 누르면 메뉴판으로 감
                                 1 -> teaOption.setHotIceOption(optionChoice)
                                 2 -> teaOption.setSweetnessOption(optionChoice)
                                 3 -> teaOption.setIceLevelOption(optionChoice)
+                                4 -> topping.toppingmenu()
                                 else -> {
                                     println("잘못된 입력입니다. 다시 입력해주세요")
                                     continue
@@ -69,11 +70,18 @@ suspend fun main() {
                             scanner.next()
                         }
                     }
-                    order.addToOrder(menuItem, options = teaOption.getOptions(), payment = payment)
+                    //장바구니 추가부분
+                    order.addToOrder(
+                        menuItem,
+                        options = teaOption.getOptions(),
+                        toppings = addToppings.toList(),
+                        payment = payment
+                    )
                 } else {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
             }
+
             6 -> {
                 if (order.isEmpty()) {
                     println("장바구니가 비어있습니다.")
