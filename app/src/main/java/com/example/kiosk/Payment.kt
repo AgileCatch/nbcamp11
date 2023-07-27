@@ -27,12 +27,14 @@ class Payment(private val order: Order) {
             1 -> {
                 paymentOption = "카드"
                 println("카드 투입구에 카드를 넣어주세요.")
+                showReceiptOption()
 
             }
             2 -> {
                 paymentOption = "쿠폰"
                 println("\n쿠폰 번호를 8자리를 입력해주세요(취소하려면 1번을 눌려주세요):")
                 inputCouponCode()
+                showReceiptOption()
             }
             3 -> {
                 paymentOption = "현금"
