@@ -36,6 +36,7 @@ suspend fun main() {
         when (choice) {
             in 1..menus.size -> {
                 val selectedMenu = menus[choice!! - 1]
+                delay(1000)
                 selectedMenu.displayMenu()
 
                 print("음료 선택:")
@@ -50,6 +51,7 @@ suspend fun main() {
                 if (menuItem != null) {
                     while (true) {
                         try {
+                            delay(1000)
                             teaOption.displayMenu()
                             print("옵션 선택:")
                             val optionChoice = scanner.nextInt()
