@@ -82,7 +82,7 @@ suspend fun main() {
                             scanner.next()
                         }
                     }
-                    order.addToOrder(menuItem, options = teaOption.getOptions(), payment = payment)
+                    order.addToOrder(menuItem, options = teaOption.getOptions(), payment = payment,toppingOption)
                 } else {
                     println("잘못된 번호를 입력했어요. 다시 입력해주세요")
                 }
