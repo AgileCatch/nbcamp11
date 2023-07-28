@@ -100,7 +100,7 @@ suspend fun main() {
                 when (orderChoice) {
                     1 -> {
                         if (!payment.isPaymentAllowed()) {
-                            println("현재는 점심시간이라, 결제를 할 수 없는 시간대입니다. \n13:00부터 14:00까지 결제가 불가능합니다.")
+                            println("현재는 점검시간이라, 결제를 할 수 없는 시간대입니다. \n24:00부터 24:30까지 결제가 불가능합니다.")
                             continue
                         }
 
