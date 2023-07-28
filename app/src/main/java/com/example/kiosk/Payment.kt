@@ -11,8 +11,8 @@ class Payment(private val order: Order, private val waiting: Waiting) {
     private var currentNumber = 0
     private var selectedMenu: MenuItem? = null
     private var selectedOptions: String = ""
-    private val blockedPayStartTime = LocalTime.of(13, 0)
-    private val blockedPayEndTime = LocalTime.of(14, 0)
+    private val blockedPayStartTime = LocalTime.of(24, 0)
+    private val blockedPayEndTime = LocalTime.of(24, 30)
 
     fun isPaymentAllowed(): Boolean {
         val now = LocalTime.now()
